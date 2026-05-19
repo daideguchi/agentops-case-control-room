@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentOps Case Control Room — Submission Deck</title>
+  <style>
+    @page { size: 16in 9in; margin: 0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0f172a; color: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .slide { width: 16in; height: 9in; padding: .72in; page-break-after: always; background: #f5f7fb; display: grid; grid-template-rows: auto 1fr auto; gap: .28in; }
+    .cover { background: linear-gradient(135deg, #eef4ff 0%, #f7fbff 52%, #eefaf3 100%); }
+    .kicker { color: #2563eb; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; font-size: .18in; }
+    h1 { font-size: .74in; line-height: .92; margin: 0; letter-spacing: 0; }
+    h2 { font-size: .46in; margin: 0; line-height: 1.05; letter-spacing: 0; }
+    p, li { font-size: .24in; line-height: 1.32; color: #475467; }
+    ul { margin: 0; padding-left: .34in; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: .36in; align-items: center; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .18in; }
+    .card { background: #fff; border: 1px solid #d8e0ea; border-radius: .08in; padding: .22in; box-shadow: 0 .14in .32in rgba(15, 23, 42, .08); }
+    .metric { font-size: .44in; font-weight: 900; color: #1d4ed8; }
+    img { max-width: 100%; border: 1px solid #d8e0ea; border-radius: .08in; box-shadow: 0 .16in .34in rgba(15, 23, 42, .12); }
+    code { background: #eaf0ff; border-radius: .04in; padding: .02in .06in; color: #1d4ed8; }
+    .footer { color: #667085; font-size: .15in; }
+  </style>
+</head>
+<body>
+  <section class="slide cover">
+    <div class="kicker">UiPath AgentHack · Maestro Case</div>
+    <div class="grid">
+      <div>
+        <h1>AgentOps Case Control Room</h1>
+        <p>Turn AI-agent work into a UiPath-governed case with evidence, risk, approval, robot work items, and human handoff.</p>
+      </div>
+      <img src="../media/uipath-case-room-full.png" alt="Case room screenshot">
+    </div>
+    <div class="footer">Live demo: https://daideguchi.github.io/agentops-case-control-room/</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">Problem</div>
+    <div class="grid">
+      <div>
+        <h2>AI agents are becoming operational workers, but real work is not a chat transcript.</h2>
+        <p>When an agent touches production systems, teams need to know what happened, what evidence was used, what risk was found, who approved it, and how work can be resumed safely.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="metric">?</div><p>What did the agent do?</p></div>
+        <div class="card"><div class="metric">!</div><p>Was a risky action blocked?</p></div>
+        <div class="card"><div class="metric">✓</div><p>Who approved the final decision?</p></div>
+      </div>
+    </div>
+    <div class="footer">Business impact: safer AI operations for release, support, IT, and automation teams.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">Solution</div>
+    <div class="grid">
+      <div>
+        <h2>A UiPath-governed case for human-AI operations.</h2>
+        <ul>
+          <li>Human opens an exception case.</li>
+          <li>AI agent creates a read-only investigation plan.</li>
+          <li>Robot gathers ticket, pull request, and owner evidence.</li>
+          <li>Policy gateway blocks risky production action.</li>
+          <li>Action Center-style tasks route approval to humans.</li>
+        </ul>
+      </div>
+      <img src="../media/action-center-demo-full.png" alt="Action Center demo">
+    </div>
+    <div class="footer">Core thesis: agents can move fast, but UiPath makes the work governable.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">Architecture</div>
+    <div class="cards">
+      <div class="card"><h2>Maestro Case</h2><p>Case stages: intake, agent investigation, robot/API evidence, risk review, approval, handoff.</p></div>
+      <div class="card"><h2>Robot Work Items</h2><p>Evidence collection is modeled as queue-ready robot work items.</p></div>
+      <div class="card"><h2>Action Center</h2><p>Human approval tasks preserve evidence, risk, and decision context.</p></div>
+    </div>
+    <div class="grid">
+      <div>
+        <p>Implementation artifacts include a BPMN-style process blueprint, case data model, Action Center form schema, robot queue model, and simulated case run.</p>
+      </div>
+      <div class="card">
+        <p><code>uipath-package/maestro-process.bpmn</code></p>
+        <p><code>runtime/robot-work-items.json</code></p>
+        <p><code>action-center/action-center-tasks.json</code></p>
+      </div>
+    </div>
+    <div class="footer">Claim boundary: verified local prototype and UiPath-ready implementation package.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">Working Proof</div>
+    <div class="grid">
+      <div>
+        <h2>Repeatable local verification is included.</h2>
+        <ul>
+          <li>26 shared AgentOps events</li>
+          <li>3 cases</li>
+          <li>5 approval gates</li>
+          <li>1 blocked production action</li>
+          <li>2 robot work items</li>
+          <li>3 Action Center tasks</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p><code>cd uipath-agenthack</code></p>
+        <p><code>bash scripts/run_uipath_local_checks.sh</code></p>
+        <p><code>verify_ok</code></p>
+        <p><code>uipath_verify_ok</code></p>
+      </div>
+    </div>
+    <div class="footer">Public GitHub: https://github.com/daideguchi/agentops-case-control-room</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">Why Now</div>
+    <div class="grid">
+      <div>
+        <h2>Enterprise agents need an operating model, not just more autonomy.</h2>
+        <p>AgentOps Case Control Room shows how human, AI, robot, and API work can be reviewed as one case. That is the bridge between a prototype on a laptop and agentic automation that enterprises can trust.</p>
+      </div>
+      <img src="../../shared-agentops-engine/media/shared-dashboard-full.png" alt="Shared dashboard">
+    </div>
+    <div class="footer">Next: import the generated process, queue, and approval models into UiPath Automation Cloud / Maestro and verify a live run.</div>
+  </section>
+</body>
+</html>

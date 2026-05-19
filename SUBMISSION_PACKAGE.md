@@ -16,6 +16,18 @@ https://github.com/daideguchi/agentops-case-control-room
 
 https://daideguchi.github.io/agentops-case-control-room/
 
+## Presentation Deck
+
+- HTML deck: `uipath-agenthack/submission/agentops-case-control-room-deck.html`
+- PDF deck: `uipath-agenthack/submission/agentops-case-control-room-deck.pdf`
+
+## Coding Agent Evidence
+
+- `CODING_AGENT_EVIDENCE.md`
+- Coding agent used: OpenAI Codex
+- Contribution: implementation, verification, documentation, public repository preparation, and submission packaging
+- Evidence: public commit history, runnable scripts, local verification output, and integrated generated artifacts
+
 ## Try It Out
 
 Open the live demo or these local demo files after cloning the repository:

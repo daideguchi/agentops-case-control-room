@@ -8,6 +8,13 @@ Submission package: [SUBMISSION_PACKAGE.md](SUBMISSION_PACKAGE.md)
 
 Live demo: https://daideguchi.github.io/agentops-case-control-room/
 
+Coding agent evidence: [CODING_AGENT_EVIDENCE.md](CODING_AGENT_EVIDENCE.md)
+
+Presentation deck:
+
+- [HTML deck](uipath-agenthack/submission/agentops-case-control-room-deck.html)
+- [PDF deck](uipath-agenthack/submission/agentops-case-control-room-deck.pdf)
+
 ## What This Is
 
 AI agents can now investigate issues, run tools, call APIs, and suggest actions. That is useful, but real business work is not just a chat transcript.
@@ -128,6 +135,12 @@ shared-agentops-engine/web/index.html
 | Approval form | `uipath-agenthack/uipath-package/action-center-form-schema.json` |
 | Robot evidence queue | `uipath-agenthack/runtime/robot-work-items.json` |
 | Handoff report | `shared-agentops-engine/reports/handoff_report.md` |
+
+## Coding Agent Usage
+
+This project used OpenAI Codex as a coding agent for implementation, verification, documentation, public repository preparation, and submission packaging.
+
+See [CODING_AGENT_EVIDENCE.md](CODING_AGENT_EVIDENCE.md) for details and verifiable evidence.
 
 ## Project Structure
 
