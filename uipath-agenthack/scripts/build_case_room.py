@@ -215,6 +215,32 @@ def build_html(packet: dict[str, Any]) -> str:
       max-width: 760px;
     }}
 
+    .nav-links {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }}
+
+    .nav-links a {{
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: #fff;
+      color: #101828;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+    }}
+
+    .nav-links a.secondary {{
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+    }}
+
     .case-meta {{
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.18);
@@ -251,6 +277,42 @@ def build_html(packet: dict[str, Any]) -> str:
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
+    }}
+
+    .review-guide {{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }}
+
+    .guide-step {{
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }}
+
+    .guide-step span {{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }}
+
+    .guide-step strong {{
+      display: block;
+      margin-bottom: 4px;
+    }}
+
+    .guide-step p {{
+      color: var(--muted);
+      font-size: 13px;
     }}
 
     .metric {{
@@ -458,7 +520,8 @@ def build_html(packet: dict[str, Any]) -> str:
       }}
 
       .metrics,
-      .stage-grid {{
+      .stage-grid,
+      .review-guide {{
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }}
 
@@ -481,7 +544,8 @@ def build_html(packet: dict[str, Any]) -> str:
       }}
 
       .metrics,
-      .stage-grid {{
+      .stage-grid,
+      .review-guide {{
         grid-template-columns: 1fr;
       }}
 
@@ -504,6 +568,11 @@ def build_html(packet: dict[str, Any]) -> str:
           This prototype shows how a human, an AI coding agent, UiPath robots, APIs, and an approval owner
           move through one auditable operations case instead of leaving work trapped in a chat transcript.
         </p>
+        <nav class="nav-links" aria-label="Demo navigation">
+          <a href="../../index.html">Back to overview</a>
+          <a class="secondary" href="../action-center/action-center-demo.html">Open approval demo</a>
+          <a class="secondary" href="../runtime/case-state-machine.json">Inspect state machine</a>
+        </nav>
       </div>
       <aside class="case-meta">
         <p><span class="meta-label">Case</span><span class="meta-value">{esc(packet["case_id"])} · {esc(packet["case_name"])}</span></p>
@@ -511,6 +580,13 @@ def build_html(packet: dict[str, Any]) -> str:
         <p><span class="meta-label">Current status</span><span class="meta-value">{esc(status_label)}</span></p>
         <p><span class="meta-label">Max risk</span><span class="meta-value">{esc(packet["max_risk"])}</span></p>
       </aside>
+    </section>
+
+    <section class="section review-guide" aria-label="3-minute review path">
+      <div class="guide-step"><span>1</span><strong>Read the case</strong><p>A human opened a release-risk exception for a payment service.</p></div>
+      <div class="guide-step"><span>2</span><strong>Follow evidence</strong><p>The AI agent, robot, and API steps each cite stable event IDs.</p></div>
+      <div class="guide-step"><span>3</span><strong>Check the gate</strong><p>The production deploy attempt is blocked before execution.</p></div>
+      <div class="guide-step"><span>4</span><strong>See the outcome</strong><p>The service owner rejects the release and the handoff remains resumable.</p></div>
     </section>
 
     <section class="section metrics">

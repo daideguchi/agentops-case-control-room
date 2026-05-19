@@ -31,8 +31,12 @@ JSONL_FILES = [
 ]
 
 HTML_CHECKS = {
-    "prototype/maestro-case-room.html": ["Maestro Case Flow", "Human Approval Queue"],
-    "action-center/action-center-demo.html": ["Every risky agent action becomes a human approval task", "Production deployment blocked by policy"],
+    "prototype/maestro-case-room.html": ["3-minute review path", "Maestro Case Flow", "Human Approval Queue"],
+    "action-center/action-center-demo.html": [
+        "Every risky agent action becomes a human approval task",
+        "Decision path",
+        "Production deployment blocked by policy",
+    ],
 }
 
 SCREENSHOTS = [

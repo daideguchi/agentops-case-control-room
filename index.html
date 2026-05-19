@@ -7,21 +7,32 @@
   <style>
     body { margin: 0; background: #f5f7fb; color: #1f2937; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
     main { max-width: 1120px; margin: 0 auto; padding: 32px 18px 56px; }
-    .hero, .panel { background: #fff; border: 1px solid #d8e0ea; border-radius: 8px; box-shadow: 0 16px 36px rgba(31,41,55,.08); }
+    .hero, .panel, .path-card { background: #fff; border: 1px solid #d8e0ea; border-radius: 8px; box-shadow: 0 16px 36px rgba(31,41,55,.08); }
     .hero { padding: 30px; display: grid; grid-template-columns: minmax(0,1fr) minmax(300px,.7fr); gap: 24px; align-items: start; }
     h1 { margin: 0 0 12px; font-size: clamp(34px, 5vw, 60px); line-height: 1.04; }
     h2 { margin: 0 0 14px; font-size: 22px; }
     p { margin: 0 0 14px; color: #475467; }
     .badge { display: inline-flex; padding: 7px 10px; border-radius: 999px; background: #eaf0ff; color: #1d4ed8; font-weight: 700; font-size: 13px; }
+    .judge-note { margin: 18px 0 0; padding: 12px 14px; border-left: 4px solid #2563eb; background: #f4f7ff; color: #253858; font-weight: 700; }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
     a.button { display: inline-flex; padding: 11px 14px; border-radius: 7px; text-decoration: none; background: #2563eb; color: white; font-weight: 700; }
     a.button.secondary { background: #eef2f7; color: #1f2937; }
     video, img { width: 100%; border: 1px solid #d8e0ea; border-radius: 8px; background: white; }
     .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 18px; }
     .panel { padding: 20px; margin-top: 18px; }
+    .review-path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .path-card { padding: 18px; box-shadow: 0 8px 24px rgba(31,41,55,.05); }
+    .path-card span { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: #eaf0ff; color: #1d4ed8; font-weight: 900; margin-bottom: 10px; }
+    .path-card strong { display: block; margin-bottom: 6px; font-size: 17px; }
+    .path-card p { margin: 0 0 12px; }
+    .path-card a { color: #1d4ed8; font-weight: 800; text-decoration: none; }
+    .proof-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+    .proof-item { padding: 12px; border: 1px solid #d8e0ea; border-radius: 8px; background: #f8fafc; }
+    .proof-item strong { display: block; font-size: 20px; color: #111827; }
+    .proof-item span { color: #667085; font-size: 13px; }
     ul { margin: 0; padding-left: 20px; color: #475467; }
     code { background: #eef2f7; border-radius: 4px; padding: 2px 5px; }
-    @media (max-width: 840px) { .hero, .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 840px) { .hero, .grid, .review-path, .proof-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -31,6 +42,7 @@
         <span class="badge">UiPath AgentHack</span>
         <h1>AgentOps Case Control Room</h1>
         <p>Turn AI-agent work into a UiPath-governed case with evidence, risk, human approval, robot work items, and handoff.</p>
+        <p class="judge-note">3-minute judge path: open the case room, inspect the approval task, then verify the runtime proof files.</p>
         <div class="actions">
           <a class="button" href="uipath-agenthack/prototype/maestro-case-room.html">Open Case Room</a>
           <a class="button secondary" href="uipath-agenthack/action-center/action-center-demo.html">Approval Demo</a>
@@ -45,6 +57,26 @@
         <source src="uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4" type="video/mp4">
       </video>
     </section>
+    <section class="review-path" aria-label="3-minute review path">
+      <article class="path-card">
+        <span>1</span>
+        <strong>Understand the work</strong>
+        <p>See the production-release exception as one governed Maestro-style case.</p>
+        <a href="uipath-agenthack/prototype/maestro-case-room.html">Open Case Room</a>
+      </article>
+      <article class="path-card">
+        <span>2</span>
+        <strong>Check human control</strong>
+        <p>Review the Action Center-style tasks that block, request evidence, and reject the release.</p>
+        <a href="uipath-agenthack/action-center/action-center-demo.html">Open Approval Demo</a>
+      </article>
+      <article class="path-card">
+        <span>3</span>
+        <strong>Verify the proof</strong>
+        <p>Inspect the state machine, transaction lifecycle, decision log, and import boundary.</p>
+        <a href="uipath-agenthack/runtime/case-state-machine.json">Open Runtime Proof</a>
+      </article>
+    </section>
     <section class="panel">
       <h2>What The Demo Shows</h2>
       <ul>
@@ -54,6 +86,15 @@
         <li>Risky production action is blocked until human approval.</li>
         <li>The handoff preserves event IDs, risk, evidence, and decisions.</li>
       </ul>
+    </section>
+    <section class="panel">
+      <h2>Proof Snapshot</h2>
+      <div class="proof-grid">
+        <div class="proof-item"><strong>11</strong><span>verified JSON artifacts</span></div>
+        <div class="proof-item"><strong>3</strong><span>JSONL lifecycle logs</span></div>
+        <div class="proof-item"><strong>6</strong><span>Orchestrator transaction events</span></div>
+        <div class="proof-item"><strong>9</strong><span>Action Center decision events</span></div>
+      </div>
     </section>
     <section class="grid">
       <a href="uipath-agenthack/prototype/maestro-case-room.html"><img src="uipath-agenthack/media/uipath-case-room-full.png" alt="Case room screenshot"></a>

@@ -84,6 +84,32 @@
       max-width: 740px;
     }
 
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: #fff;
+      color: #101828;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .nav-links a.secondary {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.24);
+    }
+
     .case-card {
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.18);
@@ -101,6 +127,44 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
+    }
+
+    .decision-path {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .decision-step {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(24, 34, 48, .04);
+    }
+
+    .decision-step span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .decision-step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .decision-step p {
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .task-card {
@@ -135,6 +199,18 @@
       margin-bottom: 12px;
       font-size: 14px;
     }
+
+    .decision-banner {
+      margin-top: 14px;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .decision-banner.danger { color: var(--danger); background: var(--danger-soft); }
+    .decision-banner.warn { color: var(--warn); background: var(--warn-soft); }
+    .decision-banner.ok { color: var(--ok); background: var(--ok-soft); }
 
     .risk-pill {
       display: inline-flex;
@@ -198,15 +274,16 @@
       color: var(--ink);
     }
 
-    button:first-child {
-      border-color: #a9dec5;
-      background: var(--ok-soft);
-      color: var(--ok);
+    button.selected {
+      border-color: #7bb7f0;
+      background: var(--brand-soft);
+      color: var(--brand);
     }
 
     @media (max-width: 920px) {
       .hero,
-      .task-grid {
+      .task-grid,
+      .decision-path {
         grid-template-columns: 1fr;
       }
     }
@@ -227,6 +304,11 @@
           This local Action Center-style view is generated from the same case packet as the Maestro case room.
           It shows exactly what the human sees when the AI tries to move a production release forward.
         </p>
+        <nav class="nav-links" aria-label="Demo navigation">
+          <a href="../../index.html">Back to overview</a>
+          <a class="secondary" href="../prototype/maestro-case-room.html">Open case room</a>
+          <a class="secondary" href="../runtime/action-center-decision-log.jsonl">Inspect decision log</a>
+        </nav>
       </div>
       <aside class="case-card">
         <strong>CASE-AI-OPS-001</strong>
@@ -234,6 +316,11 @@
         <p>Blocked actions: 1</p>
         <p>Human tasks: 3</p>
       </aside>
+    </section>
+    <section class="decision-path" aria-label="Decision path">
+      <article class="decision-step"><span>1</span><strong>Block risky action</strong><p>The production deploy is stopped before execution because approval is required.</p></article>
+      <article class="decision-step"><span>2</span><strong>Request evidence</strong><p>The human reviewer asks for service-owner signoff instead of approving blindly.</p></article>
+      <article class="decision-step"><span>3</span><strong>Reject until fixed</strong><p>The owner rejects the release until the regression evidence is resolved.</p></article>
     </section>
     <section class="task-grid">
             <article class="task-card danger">
@@ -244,15 +331,16 @@
               <h3>Production deployment blocked by policy</h3>
               <p class="role">Operations Lead</p>
               <p>Attempted production deployment was blocked by policy before execution.</p>
+              <p class="decision-banner danger">Recorded decision: blocked_by_policy</p>
               <dl>
                 <div><dt>Decision</dt><dd>blocked_by_policy</dd></div>
                 <div><dt>Evidence</dt><dd>evt-0007</dd></div>
                 <div><dt>Status</dt><dd>completed</dd></div>
               </dl>
               <div class="actions">
-                <button>Approve</button>
-                <button>Request Evidence</button>
-                <button>Reject</button>
+                <button class="selected">Blocked By Policy</button>
+<button class="">Request Evidence</button>
+<button class="">Reject</button>
               </div>
             </article>
             
@@ -265,15 +353,16 @@
               <h3>Request service-owner evidence</h3>
               <p class="role">Operations Lead</p>
               <p>Human requested more evidence instead of approving the production deployment.</p>
+              <p class="decision-banner warn">Recorded decision: needs_more_evidence</p>
               <dl>
                 <div><dt>Decision</dt><dd>needs_more_evidence</dd></div>
                 <div><dt>Evidence</dt><dd>evt-0008</dd></div>
                 <div><dt>Status</dt><dd>completed</dd></div>
               </dl>
               <div class="actions">
-                <button>Approve</button>
-                <button>Request Evidence</button>
-                <button>Reject</button>
+                <button class="">Approve</button>
+<button class="selected">Request Evidence</button>
+<button class="">Reject</button>
               </div>
             </article>
             
@@ -286,15 +375,16 @@
               <h3>Reject release until regression is fixed</h3>
               <p class="role">Service Owner</p>
               <p>Service owner rejected the release until the retry regression is fixed.</p>
+              <p class="decision-banner ok">Recorded decision: rejected</p>
               <dl>
                 <div><dt>Decision</dt><dd>rejected</dd></div>
                 <div><dt>Evidence</dt><dd>evt-0010</dd></div>
                 <div><dt>Status</dt><dd>completed</dd></div>
               </dl>
               <div class="actions">
-                <button>Approve</button>
-                <button>Request Evidence</button>
-                <button>Reject</button>
+                <button class="">Approve</button>
+<button class="">Request Evidence</button>
+<button class="selected">Reject</button>
               </div>
             </article>
             </section>
