@@ -1,0 +1,195 @@
+# Devpost Field-By-Field Draft — AgentOps Case Control Room
+
+Use this file as the copy source for the UiPath AgentHack Devpost form.
+
+Do not treat this file as proof of final submission.
+
+## Project Title
+
+```text
+AgentOps Case Control Room
+```
+
+## Tagline / Short Description
+
+```text
+Turn AI-agent work into a UiPath-governed case with evidence, risk, approval, robot work items, and human handoff.
+```
+
+## Submission URLs
+
+Live demo:
+
+```text
+https://daideguchi.github.io/agentops-case-control-room/
+```
+
+GitHub repository:
+
+```text
+https://github.com/daideguchi/agentops-case-control-room
+```
+
+Draft demo video:
+
+```text
+https://raw.githubusercontent.com/daideguchi/agentops-case-control-room/main/uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4
+```
+
+Presentation deck:
+
+```text
+https://daideguchi.github.io/agentops-case-control-room/uipath-agenthack/submission/agentops-case-control-room-deck.pdf
+```
+
+Coding Agent evidence:
+
+```text
+https://daideguchi.github.io/agentops-case-control-room/CODING_AGENT_EVIDENCE.md
+```
+
+## Inspiration
+
+AI agents are starting to do real operational work. They investigate issues, call tools, run scripts, and suggest production actions.
+
+That can save time, but it also creates a governance problem: real business work cannot be just a chat transcript.
+
+AgentOps Case Control Room was built around a simple idea: when AI helps with operational work, the work should become a governed case with evidence, approval gates, robot work items, and a handoff trail.
+
+## What It Does
+
+AgentOps Case Control Room records human, AI, robot, API, and system actions as structured case events.
+
+The flagship demo is a production release exception:
+
+- a human opens a release-risk case
+- an AI coding agent creates a read-only investigation plan
+- a UiPath-style robot gathers ticket and pull request evidence
+- a policy gateway detects a failing regression test
+- a risky production deployment is blocked
+- Action Center-style tasks route the decision to humans
+- the final handoff preserves event IDs, evidence, risk, and decisions
+
+The result is a case room where a human can understand what the agent did, what evidence was collected, what risk was found, what was blocked, and how the work can be resumed later.
+
+## How We Built It
+
+The project is built as a verified local prototype plus a UiPath-ready implementation package.
+
+It includes:
+
+- a shared AgentOps event stream
+- a UiPath-oriented case packet
+- a Maestro-style case room
+- an Action Center-style approval task model
+- robot evidence work items
+- a BPMN-style process blueprint
+- a case data model
+- an approval form schema
+- a local runtime simulator
+- a draft demo video
+- a presentation deck
+- repeatable verification scripts
+
+The main verification command is:
+
+```bash
+cd uipath-agenthack
+bash scripts/run_uipath_local_checks.sh
+```
+
+Observed output:
+
+```text
+verify_ok
+uipath_verify_ok
+json=8
+html=2
+xml=1
+screenshots=2
+```
+
+## Built With
+
+```text
+Python, HTML, CSS, JSON, JSONL, BPMN-style process artifact, UiPath Maestro case model target, UiPath Robot work-item model target, Action Center-style approval model, OpenAI Codex
+```
+
+## Coding Agent Usage
+
+This project used OpenAI Codex as a coding agent.
+
+Codex contributed to:
+
+- generating the shared AgentOps event schema and sample event stream
+- generating the UiPath-oriented case packet
+- building the Maestro-style case room
+- building the Action Center-style approval demo
+- exporting robot work items and a BPMN-style process blueprint
+- creating local verification scripts
+- creating the public GitHub Pages demo entry
+- creating submission-package documents and draft demo videos
+- running repeatable verification commands before public push
+
+Verifiable evidence is included here:
+
+```text
+https://daideguchi.github.io/agentops-case-control-room/CODING_AGENT_EVIDENCE.md
+```
+
+## Challenges
+
+The hardest part was turning a broad human-AI operations story into a concrete workflow that judges can inspect quickly.
+
+The solution needed to show real artifacts and verification without overclaiming live platform execution before a UiPath Automation Cloud import has been verified.
+
+That is why the repository includes a clear claim boundary, implementation package, repeatable local checks, and public demo assets.
+
+## Accomplishments
+
+- Built a full case-room demo
+- Generated a UiPath-oriented case packet
+- Created Action Center-style approval tasks
+- Created robot evidence work items
+- Exported a BPMN-style process blueprint
+- Added a case data model and approval form schema
+- Added local verification scripts
+- Added a GitHub Pages live demo
+- Added a presentation deck
+- Added Coding Agent evidence
+- Published a clean public repository
+
+## What We Learned
+
+AI operations need more than autonomy.
+
+They need case structure, approval boundaries, evidence, and resumable handoff.
+
+The strongest role for a platform like UiPath is not just running automation faster. It is making automation and AI-agent work governable.
+
+## What's Next
+
+The next step is to import the generated process, queue, and approval models into UiPath Automation Cloud / Maestro and verify a live case run.
+
+After that, the product can expand from one release-risk case into a reusable case-control pattern for support operations, IT operations, release management, and compliance-heavy automation teams.
+
+## Claim Boundary
+
+```text
+This is a verified local prototype and UiPath-ready implementation package.
+Live UiPath Automation Cloud execution is not claimed yet.
+```
+
+## Media Checklist
+
+Use these assets in the media section if the form allows them:
+
+- `uipath-agenthack/media/uipath-case-room-full.png`
+- `uipath-agenthack/media/action-center-demo-full.png`
+- `shared-agentops-engine/media/shared-dashboard-full.png`
+- `uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4`
+- `uipath-agenthack/submission/agentops-case-control-room-deck.pdf`
+
+## Final Submit Stopline
+
+Do not click final submit until DD explicitly approves the exact UiPath entry.

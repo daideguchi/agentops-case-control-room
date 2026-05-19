@@ -21,6 +21,10 @@ https://daideguchi.github.io/agentops-case-control-room/
 - HTML deck: `uipath-agenthack/submission/agentops-case-control-room-deck.html`
 - PDF deck: `uipath-agenthack/submission/agentops-case-control-room-deck.pdf`
 
+## Devpost Field Draft
+
+- `uipath-agenthack/submission/devpost-field-by-field.md`
+
 ## Coding Agent Evidence
 
 - `CODING_AGENT_EVIDENCE.md`

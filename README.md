@@ -15,6 +15,8 @@ Presentation deck:
 - [HTML deck](uipath-agenthack/submission/agentops-case-control-room-deck.html)
 - [PDF deck](uipath-agenthack/submission/agentops-case-control-room-deck.pdf)
 
+Devpost field draft: [uipath-agenthack/submission/devpost-field-by-field.md](uipath-agenthack/submission/devpost-field-by-field.md)
+
 ## What This Is
 
 AI agents can now investigate issues, run tools, call APIs, and suggest actions. That is useful, but real business work is not just a chat transcript.
