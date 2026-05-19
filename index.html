@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentOps Case Control Room</title>
+  <style>
+    body { margin: 0; background: #f5f7fb; color: #1f2937; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero, .panel { background: #fff; border: 1px solid #d8e0ea; border-radius: 8px; box-shadow: 0 16px 36px rgba(31,41,55,.08); }
+    .hero { padding: 30px; display: grid; grid-template-columns: minmax(0,1fr) minmax(300px,.7fr); gap: 24px; align-items: start; }
+    h1 { margin: 0 0 12px; font-size: clamp(34px, 5vw, 60px); line-height: 1.04; }
+    h2 { margin: 0 0 14px; font-size: 22px; }
+    p { margin: 0 0 14px; color: #475467; }
+    .badge { display: inline-flex; padding: 7px 10px; border-radius: 999px; background: #eaf0ff; color: #1d4ed8; font-weight: 700; font-size: 13px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    a.button { display: inline-flex; padding: 11px 14px; border-radius: 7px; text-decoration: none; background: #2563eb; color: white; font-weight: 700; }
+    a.button.secondary { background: #eef2f7; color: #1f2937; }
+    video, img { width: 100%; border: 1px solid #d8e0ea; border-radius: 8px; background: white; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 18px; }
+    .panel { padding: 20px; margin-top: 18px; }
+    ul { margin: 0; padding-left: 20px; color: #475467; }
+    code { background: #eef2f7; border-radius: 4px; padding: 2px 5px; }
+    @media (max-width: 840px) { .hero, .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div>
+        <span class="badge">UiPath AgentHack</span>
+        <h1>AgentOps Case Control Room</h1>
+        <p>Turn AI-agent work into a UiPath-governed case with evidence, risk, human approval, robot work items, and handoff.</p>
+        <div class="actions">
+          <a class="button" href="uipath-agenthack/prototype/maestro-case-room.html">Open Case Room</a>
+          <a class="button secondary" href="uipath-agenthack/action-center/action-center-demo.html">Approval Demo</a>
+          <a class="button secondary" href="SUBMISSION_PACKAGE.md">Submission Package</a>
+          <a class="button secondary" href="https://github.com/daideguchi/agentops-case-control-room">GitHub</a>
+        </div>
+      </div>
+      <video controls muted poster="uipath-agenthack/media/uipath-case-room-full.png">
+        <source src="uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section class="panel">
+      <h2>What The Demo Shows</h2>
+      <ul>
+        <li>AI investigation becomes a governed case, not a hidden transcript.</li>
+        <li>A UiPath-style robot gathers evidence and creates work items.</li>
+        <li>Risky production action is blocked until human approval.</li>
+        <li>The handoff preserves event IDs, risk, evidence, and decisions.</li>
+      </ul>
+    </section>
+    <section class="grid">
+      <a href="uipath-agenthack/prototype/maestro-case-room.html"><img src="uipath-agenthack/media/uipath-case-room-full.png" alt="Case room screenshot"></a>
+      <a href="uipath-agenthack/action-center/action-center-demo.html"><img src="uipath-agenthack/media/action-center-demo-full.png" alt="Action Center approval screenshot"></a>
+      <a href="shared-agentops-engine/web/index.html"><img src="shared-agentops-engine/media/shared-dashboard-full.png" alt="Shared AgentOps dashboard screenshot"></a>
+    </section>
+    <section class="panel">
+      <h2>Verify Locally</h2>
+      <p><code>cd uipath-agenthack && bash scripts/run_uipath_local_checks.sh</code></p>
+    </section>
+  </main>
+</body>
+</html>
