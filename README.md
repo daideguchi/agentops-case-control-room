@@ -6,6 +6,8 @@ Target hackathon: [UiPath AgentHack](https://uipath-agenthack.devpost.com/)
 
 Submission package: [SUBMISSION_PACKAGE.md](SUBMISSION_PACKAGE.md)
 
+Live demo: https://daideguchi.github.io/agentops-case-control-room/
+
 ## What This Is
 
 AI agents can now investigate issues, run tools, call APIs, and suggest actions. That is useful, but real business work is not just a chat transcript.
@@ -109,6 +111,7 @@ bash scripts/build_demo_video.sh
 Open:
 
 ```text
+https://daideguchi.github.io/agentops-case-control-room/
 uipath-agenthack/prototype/maestro-case-room.html
 uipath-agenthack/action-center/action-center-demo.html
 shared-agentops-engine/web/index.html
