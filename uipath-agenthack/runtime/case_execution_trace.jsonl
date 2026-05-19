@@ -1,0 +1,6 @@
+{"decision": "none", "event_ids": ["evt-0001"], "max_risk": "none", "owner": "Human", "stage_id": "stage-01", "stage_name": "Intake", "status": "completed"}
+{"decision": "none", "event_ids": ["evt-0002", "evt-0005"], "max_risk": "medium", "owner": "AI Agent", "stage_id": "stage-02", "stage_name": "Agent Investigation", "status": "failed"}
+{"decision": "none", "event_ids": ["evt-0003", "evt-0004", "evt-0009"], "max_risk": "low", "owner": "UiPath Robot + APIs", "stage_id": "stage-03", "stage_name": "Robot/API Evidence Collection", "status": "completed"}
+{"decision": "blocked_by_policy", "event_ids": ["evt-0006", "evt-0007"], "max_risk": "critical", "owner": "Control Plane", "stage_id": "stage-04", "stage_name": "Risk Review", "status": "blocked"}
+{"decision": "rejected", "event_ids": ["evt-0007", "evt-0008", "evt-0010"], "max_risk": "critical", "owner": "Action Center", "stage_id": "stage-05", "stage_name": "Human Approval", "status": "blocked"}
+{"decision": "none", "event_ids": ["evt-0011"], "max_risk": "none", "owner": "Recorder", "stage_id": "stage-06", "stage_name": "Handoff", "status": "completed"}

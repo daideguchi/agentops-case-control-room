@@ -1,0 +1,34 @@
+{
+  "queues": [
+    {
+      "name": "AgentOpsEvidenceCollection",
+      "purpose": "collect release, pull-request, owner, and failed-test evidence",
+      "items": [
+        {
+          "queue_item_id": "robot-evt-0003",
+          "queue_name": "AgentOpsEvidenceCollection",
+          "case_id": "CASE-AI-OPS-001",
+          "robot": "uipath-evidence-robot",
+          "action": "collect_release_context",
+          "target": "change-ticket-7841",
+          "status": "success",
+          "duration_ms": 4800,
+          "source_event_id": "evt-0003",
+          "summary": "Robot gathered the change ticket, linked pull request, deployment window, and service owner."
+        },
+        {
+          "queue_item_id": "robot-evt-0009",
+          "queue_name": "AgentOpsEvidenceCollection",
+          "case_id": "CASE-AI-OPS-001",
+          "robot": "uipath-evidence-robot",
+          "action": "request_owner_signoff",
+          "target": "payments-service owner",
+          "status": "success",
+          "duration_ms": 8200,
+          "source_event_id": "evt-0009",
+          "summary": "Robot requested service-owner signoff and attached the failed test evidence."
+        }
+      ]
+    }
+  ]
+}

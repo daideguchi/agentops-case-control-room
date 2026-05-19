@@ -1,0 +1,49 @@
+{
+  "name": "AgentOpsApprovalTask",
+  "target": "UiPath Action Center / Apps approval form",
+  "fields": [
+    {
+      "name": "case_id",
+      "type": "readonlyText",
+      "label": "Case ID",
+      "source": "case.case_id"
+    },
+    {
+      "name": "risk_level",
+      "type": "badge",
+      "label": "Risk level",
+      "source": "task.risk_level"
+    },
+    {
+      "name": "evidence_summary",
+      "type": "textarea",
+      "label": "Evidence summary",
+      "source": "task.summary",
+      "readonly": true
+    },
+    {
+      "name": "decision",
+      "type": "choice",
+      "label": "Decision",
+      "options": [
+        "approve",
+        "request_more_evidence",
+        "reject"
+      ],
+      "required": true
+    },
+    {
+      "name": "moderator_comment",
+      "type": "textarea",
+      "label": "Decision note",
+      "required": false
+    }
+  ],
+  "policy": {
+    "production_deploy": "requires_human_approval",
+    "payment_behavior_change": "requires_owner_signoff",
+    "failed_regression": "blocks_release_until_fixed",
+    "missing_evidence": "route_back_to_robot_collection"
+  },
+  "claim_boundary": "local form schema only; not published to UiPath Action Center yet"
+}

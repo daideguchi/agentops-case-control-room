@@ -1,0 +1,141 @@
+{
+  "name": "AgentOps Case Control Room",
+  "case_id": "CASE-AI-OPS-001",
+  "uipath_target": "Maestro Case",
+  "source_packet": "../shared-agentops-engine/adapters/uipath/case_packet.json",
+  "status_boundary": "prototype_spec_not_verified_in_uipath_cloud",
+  "business_goal": "Route AI-agent operational work through evidence collection, risk review, human approval, and handoff before sensitive action.",
+  "process_variables": [
+    {
+      "name": "case_id",
+      "type": "String",
+      "example": "CASE-AI-OPS-001"
+    },
+    {
+      "name": "service_name",
+      "type": "String",
+      "example": "payments-service"
+    },
+    {
+      "name": "max_risk",
+      "type": "String",
+      "example": "critical"
+    },
+    {
+      "name": "approval_decision",
+      "type": "String",
+      "example": "rejected"
+    },
+    {
+      "name": "handoff_report_path",
+      "type": "String",
+      "example": "../shared-agentops-engine/reports/handoff_report.md"
+    }
+  ],
+  "participants": [
+    {
+      "id": "operations_lead",
+      "type": "human",
+      "role": "opens case and requests more evidence when risk is unclear"
+    },
+    {
+      "id": "codex_ops_agent",
+      "type": "agent",
+      "role": "performs read-only investigation and proposes next action"
+    },
+    {
+      "id": "uipath_evidence_robot",
+      "type": "robot",
+      "role": "collects change ticket, pull request, deployment window, failed test, and owner evidence"
+    },
+    {
+      "id": "service_owner",
+      "type": "human",
+      "role": "approves or rejects the risky release"
+    },
+    {
+      "id": "agentops_recorder",
+      "type": "system",
+      "role": "writes final event-linked handoff report"
+    }
+  ],
+  "flow": [
+    {
+      "id": "start_case",
+      "type": "start_event",
+      "label": "Production release exception opened",
+      "evidence_events": ["evt-0001"]
+    },
+    {
+      "id": "agent_investigation",
+      "type": "agent_task",
+      "label": "Agent creates read-only investigation plan and runs verification",
+      "owner": "codex_ops_agent",
+      "evidence_events": ["evt-0002", "evt-0005"]
+    },
+    {
+      "id": "collect_release_context",
+      "type": "robot_task",
+      "label": "Robot gathers change ticket, PR, deployment, and owner context",
+      "owner": "uipath_evidence_robot",
+      "evidence_events": ["evt-0003", "evt-0004"]
+    },
+    {
+      "id": "risk_gateway",
+      "type": "exclusive_gateway",
+      "label": "Is production action risky or under-evidenced?",
+      "rules": [
+        "route_to_human_approval_if max_risk in ['high', 'critical']",
+        "route_to_human_approval_if human_approval_required is true",
+        "continue_to_handoff_if max_risk in ['none', 'low'] and no approval is required"
+      ],
+      "evidence_events": ["evt-0006", "evt-0007"]
+    },
+    {
+      "id": "human_approval",
+      "type": "human_task",
+      "label": "Operations lead reviews evidence and asks for more context",
+      "owner": "operations_lead",
+      "evidence_events": ["evt-0008"]
+    },
+    {
+      "id": "owner_signoff",
+      "type": "human_task",
+      "label": "Service owner rejects release until regression is fixed",
+      "owner": "service_owner",
+      "evidence_events": ["evt-0009", "evt-0010"]
+    },
+    {
+      "id": "write_handoff",
+      "type": "system_task",
+      "label": "Generate event-linked handoff report",
+      "owner": "agentops_recorder",
+      "evidence_events": ["evt-0011"]
+    },
+    {
+      "id": "end_case",
+      "type": "end_event",
+      "label": "Release rejected until evidence is fixed"
+    }
+  ],
+  "approval_policy": {
+    "production_deploy": "requires_human_approval",
+    "payment_behavior_change": "requires_owner_signoff",
+    "failed_regression": "blocks_release_until_fixed",
+    "missing_evidence": "route_back_to_robot_collection"
+  },
+  "demo_metrics": [
+    "events_recorded",
+    "human_approval_gates",
+    "blocked_actions",
+    "robot_api_evidence_steps",
+    "handoff_completeness"
+  ],
+  "next_uipath_build_steps": [
+    "Create the Maestro process with the listed tasks and gateway.",
+    "Use Action Center or Apps for the human approval tasks.",
+    "Map the evidence robot to a UiPath workflow that reads ticket and PR context.",
+    "Persist the AgentOps event stream as case context.",
+    "Export the final handoff report with cited event IDs."
+  ]
+}

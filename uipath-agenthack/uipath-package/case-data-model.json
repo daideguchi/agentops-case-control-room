@@ -1,0 +1,50 @@
+{
+  "name": "AgentOpsCase",
+  "source": "architecture/maestro-process-spec.json",
+  "fields": [
+    {
+      "name": "case_id",
+      "type": "String",
+      "example": "CASE-AI-OPS-001"
+    },
+    {
+      "name": "service_name",
+      "type": "String",
+      "example": "payments-service"
+    },
+    {
+      "name": "max_risk",
+      "type": "String",
+      "example": "critical"
+    },
+    {
+      "name": "approval_decision",
+      "type": "String",
+      "example": "rejected"
+    },
+    {
+      "name": "handoff_report_path",
+      "type": "String",
+      "example": "../shared-agentops-engine/reports/handoff_report.md"
+    },
+    {
+      "name": "current_stage",
+      "type": "String",
+      "example": "Human Approval"
+    },
+    {
+      "name": "blocked_action_count",
+      "type": "Int32",
+      "example": 1
+    },
+    {
+      "name": "evidence_event_ids",
+      "type": "String[]",
+      "example": [
+        "evt-0005",
+        "evt-0007"
+      ]
+    }
+  ],
+  "claim_boundary": "local schema for UiPath build planning; not imported into Automation Cloud yet"
+}

@@ -1,0 +1,83 @@
+{
+  "case_id": "CASE-AI-OPS-001",
+  "case_name": "AI Agent Operations Exception Review",
+  "status": "release_rejected_until_evidence_fixed",
+  "max_risk": "critical",
+  "stage_results": [
+    {
+      "stage_id": "stage-01",
+      "stage_name": "Intake",
+      "owner": "Human",
+      "status": "completed",
+      "max_risk": "none",
+      "event_ids": [
+        "evt-0001"
+      ],
+      "decision": "none"
+    },
+    {
+      "stage_id": "stage-02",
+      "stage_name": "Agent Investigation",
+      "owner": "AI Agent",
+      "status": "failed",
+      "max_risk": "medium",
+      "event_ids": [
+        "evt-0002",
+        "evt-0005"
+      ],
+      "decision": "none"
+    },
+    {
+      "stage_id": "stage-03",
+      "stage_name": "Robot/API Evidence Collection",
+      "owner": "UiPath Robot + APIs",
+      "status": "completed",
+      "max_risk": "low",
+      "event_ids": [
+        "evt-0003",
+        "evt-0004",
+        "evt-0009"
+      ],
+      "decision": "none"
+    },
+    {
+      "stage_id": "stage-04",
+      "stage_name": "Risk Review",
+      "owner": "Control Plane",
+      "status": "blocked",
+      "max_risk": "critical",
+      "event_ids": [
+        "evt-0006",
+        "evt-0007"
+      ],
+      "decision": "blocked_by_policy"
+    },
+    {
+      "stage_id": "stage-05",
+      "stage_name": "Human Approval",
+      "owner": "Action Center",
+      "status": "blocked",
+      "max_risk": "critical",
+      "event_ids": [
+        "evt-0007",
+        "evt-0008",
+        "evt-0010"
+      ],
+      "decision": "rejected"
+    },
+    {
+      "stage_id": "stage-06",
+      "stage_name": "Handoff",
+      "owner": "Recorder",
+      "status": "completed",
+      "max_risk": "none",
+      "event_ids": [
+        "evt-0011"
+      ],
+      "decision": "none"
+    }
+  ],
+  "blocked_action_count": 1,
+  "human_task_count": 3,
+  "robot_work_item_count": 2
+}

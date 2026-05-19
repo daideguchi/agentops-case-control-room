@@ -1,0 +1,20 @@
+{
+  "package_name": "AgentOps Case Control Room",
+  "version": "0.1.0-local",
+  "target": "UiPath Maestro Case + Robot + Action Center",
+  "status": "local_implementation_package_not_cloud_verified",
+  "source_case_packet": "shared-agentops-engine/adapters/uipath/case_packet.json",
+  "source_process_spec": "architecture/maestro-process-spec.json",
+  "case_id": "CASE-AI-OPS-001",
+  "process_name": "AgentOps Case Control Room",
+  "included_artifacts": [
+    "runtime/maestro-simulated-case-run.json",
+    "runtime/case_execution_trace.jsonl",
+    "action-center/action-center-tasks.json",
+    "runtime/robot-work-items.json",
+    "uipath-package/orchestrator-queues.json",
+    "uipath-package/case-data-model.json",
+    "runtime/maestro-simulated-run-report.md"
+  ],
+  "stopline": "Do not claim live UiPath Automation Cloud execution until imported and verified."
+}

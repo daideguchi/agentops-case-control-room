@@ -1,0 +1,50 @@
+[
+  {
+    "task_id": "act-evt-0007",
+    "case_id": "CASE-AI-OPS-001",
+    "title": "Production deployment blocked by policy",
+    "assigned_to_role": "Operations Lead",
+    "status": "completed",
+    "decision": "blocked_by_policy",
+    "risk_level": "critical",
+    "source_event_id": "evt-0007",
+    "summary": "Attempted production deployment was blocked by policy before execution.",
+    "available_actions": [
+      "approve",
+      "reject",
+      "request_more_evidence"
+    ]
+  },
+  {
+    "task_id": "act-evt-0008",
+    "case_id": "CASE-AI-OPS-001",
+    "title": "Request service-owner evidence",
+    "assigned_to_role": "Operations Lead",
+    "status": "completed",
+    "decision": "needs_more_evidence",
+    "risk_level": "medium",
+    "source_event_id": "evt-0008",
+    "summary": "Human requested more evidence instead of approving the production deployment.",
+    "available_actions": [
+      "approve",
+      "reject",
+      "request_more_evidence"
+    ]
+  },
+  {
+    "task_id": "act-evt-0010",
+    "case_id": "CASE-AI-OPS-001",
+    "title": "Reject release until regression is fixed",
+    "assigned_to_role": "Service Owner",
+    "status": "completed",
+    "decision": "rejected",
+    "risk_level": "low",
+    "source_event_id": "evt-0010",
+    "summary": "Service owner rejected the release until the retry regression is fixed.",
+    "available_actions": [
+      "approve",
+      "reject",
+      "request_more_evidence"
+    ]
+  }
+]
