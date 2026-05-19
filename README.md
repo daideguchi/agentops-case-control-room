@@ -4,9 +4,13 @@ Turn AI-agent work into a UiPath-governed case with evidence, risk, human approv
 
 Target hackathon: [UiPath AgentHack](https://uipath-agenthack.devpost.com/)
 
+Devpost submission: https://devpost.com/software/agentops-case-control-room
+
 Submission package: [SUBMISSION_PACKAGE.md](SUBMISSION_PACKAGE.md)
 
 Live demo: https://daideguchi.github.io/agentops-case-control-room/
+
+YouTube demo: https://www.youtube.com/watch?v=-xbPUI7u0Gw
 
 Coding agent evidence: [CODING_AGENT_EVIDENCE.md](CODING_AGENT_EVIDENCE.md)
 
@@ -56,6 +60,8 @@ The demo scenario is a production release exception for a payment service.
 7. The service owner rejects the release until the regression is fixed.
 8. A handoff report preserves every important event ID.
 
+The story comes from a real human-AI working rhythm: AI agents can move quickly, but the important work is knowing what they did, what evidence they used, when a human stopped the action, and how another human or future AI agent can safely resume.
+
 ## Screenshots
 
 ### Case Room
@@ -75,6 +81,7 @@ The demo scenario is a production release exception for a payment service.
 Captioned narrated demo video for Devpost media:
 
 ```text
+https://www.youtube.com/watch?v=-xbPUI7u0Gw
 uipath-agenthack/media/agentops-case-control-room-demo.mp4
 ```
 

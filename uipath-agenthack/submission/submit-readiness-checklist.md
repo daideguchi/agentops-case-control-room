@@ -2,7 +2,14 @@
 
 Updated: 2026-05-20 JST
 
-Status: final submit authorized by DD; Devpost saved/submitted proof still must be recorded after the form is completed.
+Status: submitted on Devpost after DD final authorization. Public proof and video embed were verified on 2026-05-20 JST.
+
+## Public Submission Proof
+
+- Devpost: `https://devpost.com/software/agentops-case-control-room`
+- GitHub: `https://github.com/daideguchi/agentops-case-control-room`
+- Live demo: `https://daideguchi.github.io/agentops-case-control-room/`
+- YouTube demo: `https://www.youtube.com/watch?v=-xbPUI7u0Gw`
 
 ## Current Proof Assets
 
@@ -63,9 +70,8 @@ bash scripts/run_uipath_local_checks.sh
 ## Not Yet Claimed
 
 - Do not claim real UiPath Automation Cloud integration until it is actually built and verified.
-- Do not claim a final Devpost submission until the submission page is saved/submitted and the public proof URL is recorded.
 - Do not accept additional platform terms, submit personal forms, or enter billing details without DD approval.
 
 ## Next Best Step
 
-Build or verify the real UiPath Automation Cloud / Maestro case implementation. If platform access is blocked, use the generated local case room as the demo backbone and state clearly that it is a prototype export of the intended UiPath case model.
+If continuing after submission, the next product step is importing the generated process, queue, and approval models into UiPath Automation Cloud / Maestro and verifying a live case run. The submitted entry intentionally claims only the verified local prototype plus UiPath-ready package.

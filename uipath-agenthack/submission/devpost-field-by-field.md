@@ -2,7 +2,11 @@
 
 Use this file as the copy source for the UiPath AgentHack Devpost form.
 
-Do not treat this file as proof of final submission.
+Final submitted public page:
+
+```text
+https://devpost.com/software/agentops-case-control-room
+```
 
 ## Project Title
 
@@ -31,6 +35,12 @@ https://github.com/daideguchi/agentops-case-control-room
 ```
 
 Demo video:
+
+```text
+https://www.youtube.com/watch?v=-xbPUI7u0Gw
+```
+
+Direct media fallback:
 
 ```text
 https://raw.githubusercontent.com/daideguchi/agentops-case-control-room/main/uipath-agenthack/media/agentops-case-control-room-demo.mp4
@@ -212,4 +222,4 @@ Use these assets in the media section if the form allows them:
 
 ## Final Submit Stopline
 
-Do not click final submit until DD explicitly approves the exact UiPath entry.
+DD approved final submission. Devpost now shows the project submitted to UiPath AgentHack, and the public page embeds the YouTube demo video.

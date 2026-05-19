@@ -12,9 +12,17 @@ Turn AI-agent work into a UiPath-governed case with evidence, risk, approval, ro
 
 https://github.com/daideguchi/agentops-case-control-room
 
+## Devpost Submission
+
+https://devpost.com/software/agentops-case-control-room
+
 ## Live Demo
 
 https://daideguchi.github.io/agentops-case-control-room/
+
+## YouTube Demo
+
+https://www.youtube.com/watch?v=-xbPUI7u0Gw
 
 ## Presentation Deck
 
@@ -51,7 +59,8 @@ Open the live demo or these local demo files after cloning the repository:
 
 Captioned narrated video:
 
-- `uipath-agenthack/media/agentops-case-control-room-demo.mp4`
+- YouTube: `https://www.youtube.com/watch?v=-xbPUI7u0Gw`
+- Local file: `uipath-agenthack/media/agentops-case-control-room-demo.mp4`
 
 Regenerate:
 
