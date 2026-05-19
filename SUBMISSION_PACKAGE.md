@@ -45,6 +45,7 @@ Open the live demo or these local demo files after cloning the repository:
 - `uipath-agenthack/media/uipath-case-room-full.png`
 - `uipath-agenthack/media/action-center-demo-full.png`
 - `shared-agentops-engine/media/shared-dashboard-full.png`
+- `uipath-agenthack/media/generated/devpost-thumbnail.png`
 
 ## Demo Video
 

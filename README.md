@@ -78,6 +78,12 @@ Captioned narrated demo video for Devpost media:
 uipath-agenthack/media/agentops-case-control-room-demo.mp4
 ```
 
+### Devpost Thumbnail
+
+```text
+uipath-agenthack/media/generated/devpost-thumbnail.png
+```
+
 ## What Is Working Locally
 
 - Shared AgentOps event stream with 26 events

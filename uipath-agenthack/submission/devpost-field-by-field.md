@@ -206,6 +206,7 @@ Use these assets in the media section if the form allows them:
 - `uipath-agenthack/media/uipath-case-room-full.png`
 - `uipath-agenthack/media/action-center-demo-full.png`
 - `shared-agentops-engine/media/shared-dashboard-full.png`
+- `uipath-agenthack/media/generated/devpost-thumbnail.png`
 - `uipath-agenthack/media/agentops-case-control-room-demo.mp4`
 - `uipath-agenthack/submission/agentops-case-control-room-deck.pdf`
 
