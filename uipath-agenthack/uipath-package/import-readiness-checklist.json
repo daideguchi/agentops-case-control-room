@@ -1,0 +1,49 @@
+{
+  "package": "AgentOps Case Control Room",
+  "status": "ready_for_manual_uipath_import_review",
+  "stopline": "blocked_until_platform_verification: do not claim live UiPath Automation Cloud execution before import and live run proof",
+  "items": [
+    {
+      "area": "Maestro case flow",
+      "status": "ready_local",
+      "artifact": "architecture/maestro-process-spec.json",
+      "review_note": "Case states, owners, risk gateway, and terminal rejection path are specified."
+    },
+    {
+      "area": "BPMN-style process",
+      "status": "ready_local",
+      "artifact": "uipath-package/maestro-process.bpmn",
+      "review_note": "Import shape exists as a process blueprint, not a verified UiPath export."
+    },
+    {
+      "area": "Orchestrator queue",
+      "status": "ready_local",
+      "artifact": "uipath-package/orchestrator-queues.json",
+      "review_note": "Robot queue item payloads include source event IDs and lifecycle logs."
+    },
+    {
+      "area": "Action Center payloads",
+      "status": "ready_local",
+      "artifact": "uipath-package/action-center-task-payloads.json",
+      "review_note": "Human decision tasks include available actions and evidence fields."
+    },
+    {
+      "area": "Case data model",
+      "status": "ready_local",
+      "artifact": "uipath-package/case-data-model.json",
+      "review_note": "Core process variables and event references are mapped."
+    },
+    {
+      "area": "Cloud import",
+      "status": "needs_cloud_import",
+      "artifact": "UiPath Automation Cloud",
+      "review_note": "Requires manual import/build in UiPath Maestro, Orchestrator, and Action Center."
+    },
+    {
+      "area": "Live execution proof",
+      "status": "blocked_until_platform_verification",
+      "artifact": "UiPath Automation Cloud run evidence",
+      "review_note": "Need a live run ID, queue transaction ID, Action Center task ID, and screenshots before claiming live execution."
+    }
+  ]
+}

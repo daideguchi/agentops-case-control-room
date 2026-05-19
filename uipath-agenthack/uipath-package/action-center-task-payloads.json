@@ -1,0 +1,135 @@
+{
+  "form_family": "AgentOpsActionCenterReview",
+  "claim_boundary": "local payload contract for UiPath Action Center or Apps import; not live-imported yet",
+  "tasks": [
+    {
+      "task_id": "act-evt-0007",
+      "form_title": "Production deployment blocked by policy",
+      "assigned_to_role": "Operations Lead",
+      "source_event_id": "evt-0007",
+      "available_actions": [
+        "approve",
+        "reject",
+        "request_more_evidence"
+      ],
+      "fields": [
+        {
+          "name": "case_id",
+          "type": "Text",
+          "required": true,
+          "value": "CASE-AI-OPS-001"
+        },
+        {
+          "name": "risk_level",
+          "type": "SingleSelect",
+          "required": true,
+          "value": "critical"
+        },
+        {
+          "name": "source_event_id",
+          "type": "Text",
+          "required": true,
+          "value": "evt-0007"
+        },
+        {
+          "name": "evidence_summary",
+          "type": "Paragraph",
+          "required": true,
+          "value": "Attempted production deployment was blocked by policy before execution."
+        },
+        {
+          "name": "moderator_decision",
+          "type": "SingleSelect",
+          "required": true,
+          "value": "blocked_by_policy"
+        }
+      ]
+    },
+    {
+      "task_id": "act-evt-0008",
+      "form_title": "Request service-owner evidence",
+      "assigned_to_role": "Operations Lead",
+      "source_event_id": "evt-0008",
+      "available_actions": [
+        "approve",
+        "reject",
+        "request_more_evidence"
+      ],
+      "fields": [
+        {
+          "name": "case_id",
+          "type": "Text",
+          "required": true,
+          "value": "CASE-AI-OPS-001"
+        },
+        {
+          "name": "risk_level",
+          "type": "SingleSelect",
+          "required": true,
+          "value": "medium"
+        },
+        {
+          "name": "source_event_id",
+          "type": "Text",
+          "required": true,
+          "value": "evt-0008"
+        },
+        {
+          "name": "evidence_summary",
+          "type": "Paragraph",
+          "required": true,
+          "value": "Human requested more evidence instead of approving the production deployment."
+        },
+        {
+          "name": "moderator_decision",
+          "type": "SingleSelect",
+          "required": true,
+          "value": "needs_more_evidence"
+        }
+      ]
+    },
+    {
+      "task_id": "act-evt-0010",
+      "form_title": "Reject release until regression is fixed",
+      "assigned_to_role": "Service Owner",
+      "source_event_id": "evt-0010",
+      "available_actions": [
+        "approve",
+        "reject",
+        "request_more_evidence"
+      ],
+      "fields": [
+        {
+          "name": "case_id",
+          "type": "Text",
+          "required": true,
+          "value": "CASE-AI-OPS-001"
+        },
+        {
+          "name": "risk_level",
+          "type": "SingleSelect",
+          "required": true,
+          "value": "low"
+        },
+        {
+          "name": "source_event_id",
+          "type": "Text",
+          "required": true,
+          "value": "evt-0010"
+        },
+        {
+          "name": "evidence_summary",
+          "type": "Paragraph",
+          "required": true,
+          "value": "Service owner rejected the release until the retry regression is fixed."
+        },
+        {
+          "name": "moderator_decision",
+          "type": "SingleSelect",
+          "required": true,
+          "value": "rejected"
+        }
+      ]
+    }
+  ]
+}

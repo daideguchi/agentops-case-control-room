@@ -87,7 +87,11 @@ The flagship demo is a production release exception:
 - Maestro-style case room HTML
 - Action Center-style approval task model
 - Robot work-item model
+- Orchestrator transaction lifecycle log
+- Action Center decision lifecycle log
+- Deterministic case state machine
 - BPMN-style process blueprint
+- UiPath import-readiness checklist
 - Local runtime simulator
 - Evidence-linked handoff report
 
@@ -106,10 +110,15 @@ The flagship demo is a production release exception:
 ```text
 verify_ok
 uipath_verify_ok
-json=8
+json=11
+jsonl=3
 html=2
+markdown=2
 xml=1
 screenshots=2
+state_machine=ClosedRejected
+transaction_events=6
+action_decision_events=9
 ```
 
 ## Verification Commands
@@ -144,6 +153,9 @@ The main challenge was turning a broad human-AI operations story into a concrete
 - Generated a UiPath-oriented case packet
 - Created Action Center-style approval tasks
 - Created robot work items
+- Added Orchestrator transaction lifecycle logs
+- Added Action Center decision lifecycle logs
+- Added a case state machine with blocked, more-evidence, owner-signoff, and rejected paths
 - Exported a BPMN-style process blueprint
 - Added local verification scripts
 - Published a clean public repository

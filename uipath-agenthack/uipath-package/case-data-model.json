@@ -44,6 +44,25 @@
         "evt-0005",
         "evt-0007"
       ]
+    },
+    {
+      "name": "orchestrator_transaction_ids",
+      "type": "String[]",
+      "example": [
+        "txn-0001-evt-0003"
+      ]
+    },
+    {
+      "name": "action_center_task_ids",
+      "type": "String[]",
+      "example": [
+        "act-evt-0007"
+      ]
+    },
+    {
+      "name": "final_state",
+      "type": "String",
+      "example": "ClosedRejected"
     }
   ],
   "claim_boundary": "local schema for UiPath build planning; not imported into Automation Cloud yet"

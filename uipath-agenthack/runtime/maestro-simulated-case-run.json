@@ -79,5 +79,8 @@
   ],
   "blocked_action_count": 1,
   "human_task_count": 3,
-  "robot_work_item_count": 2
+  "robot_work_item_count": 2,
+  "orchestrator_transaction_event_count": 6,
+  "action_center_decision_event_count": 9,
+  "final_state": "ClosedRejected"
 }

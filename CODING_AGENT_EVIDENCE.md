@@ -16,6 +16,10 @@ Codex contributed to the working solution by:
 - building the Maestro-style case room
 - building the Action Center-style approval demo
 - exporting robot work items and a BPMN-style process blueprint
+- generating a deterministic case state machine
+- generating local Orchestrator transaction lifecycle logs
+- generating local Action Center decision lifecycle logs
+- generating a UiPath import-readiness checklist with a live-platform stopline
 - creating local verification scripts
 - creating the public GitHub Pages demo entry
 - creating submission-package documents and draft demo videos
@@ -34,6 +38,10 @@ The coding-agent output is not just referenced in a writeup. It is integrated in
 - `uipath-agenthack/scripts/build_action_center_demo.py`
 - `uipath-agenthack/scripts/verify_uipath_package.py`
 - `uipath-agenthack/scripts/build_demo_video.sh`
+- `uipath-agenthack/runtime/case-state-machine.json`
+- `uipath-agenthack/runtime/orchestrator-transaction-log.jsonl`
+- `uipath-agenthack/runtime/action-center-decision-log.jsonl`
+- `uipath-agenthack/uipath-package/import-readiness-checklist.json`
 - `index.html`
 
 ## Verifiable Evidence
@@ -53,10 +61,15 @@ bash scripts/run_uipath_local_checks.sh
 ```text
 verify_ok
 uipath_verify_ok
-json=8
+json=11
+jsonl=3
 html=2
+markdown=2
 xml=1
 screenshots=2
+state_machine=ClosedRejected
+transaction_events=6
+action_decision_events=9
 ```
 
 4. Public live demo:

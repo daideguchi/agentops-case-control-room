@@ -31,6 +31,12 @@ ORCHESTRATOR_QUEUE_FILE = PACKAGE_DIR / "orchestrator-queues.json"
 CASE_SCHEMA_FILE = PACKAGE_DIR / "case-data-model.json"
 PACKAGE_MANIFEST_FILE = PACKAGE_DIR / "package-manifest.json"
 REPORT_FILE = RUNTIME_DIR / "maestro-simulated-run-report.md"
+TRANSACTION_LOG_FILE = RUNTIME_DIR / "orchestrator-transaction-log.jsonl"
+ACTION_DECISION_LOG_FILE = RUNTIME_DIR / "action-center-decision-log.jsonl"
+STATE_MACHINE_FILE = RUNTIME_DIR / "case-state-machine.json"
+ACTION_PAYLOADS_FILE = PACKAGE_DIR / "action-center-task-payloads.json"
+IMPORT_READINESS_FILE = PACKAGE_DIR / "import-readiness-checklist.json"
+STATE_TRANSITION_TABLE_FILE = PACKAGE_DIR / "maestro-state-transition-table.md"
 
 RISK_WEIGHT = {"none": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 
@@ -150,6 +156,243 @@ def build_robot_work_items(packet: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
+def build_orchestrator_transaction_log(robot_work_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    transactions: list[dict[str, Any]] = []
+    for index, item in enumerate(robot_work_items, start=1):
+        transaction_id = f"txn-{index:04d}-{item['source_event_id']}"
+        final_status = "Successful" if item["status"] == "success" else "BusinessException"
+        for step, transaction_status in enumerate(["New", "InProgress", final_status], start=1):
+            row: dict[str, Any] = {
+                "transaction_id": transaction_id,
+                "queue_item_id": item["queue_item_id"],
+                "queue_name": item["queue_name"],
+                "case_id": item["case_id"],
+                "source_event_id": item["source_event_id"],
+                "robot": item["robot"],
+                "transaction_status": transaction_status,
+                "retry_number": 0,
+                "step_sequence": step,
+            }
+            if transaction_status == final_status:
+                row["output"] = {
+                    "action": item["action"],
+                    "target": item["target"],
+                    "duration_ms": item["duration_ms"],
+                    "summary": item["summary"],
+                }
+            transactions.append(row)
+    return transactions
+
+
+def build_action_decision_log(action_tasks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    decisions: list[dict[str, Any]] = []
+    for task in action_tasks:
+        for step, task_status in enumerate(["Created", "Assigned", "Completed"], start=1):
+            row: dict[str, Any] = {
+                "task_id": task["task_id"],
+                "case_id": task["case_id"],
+                "source_event_id": task["source_event_id"],
+                "assigned_to_role": task["assigned_to_role"],
+                "task_status": task_status,
+                "risk_level": task["risk_level"],
+                "step_sequence": step,
+            }
+            if task_status == "Completed":
+                row["decision"] = task["decision"]
+                row["decision_summary"] = task["summary"]
+            decisions.append(row)
+    return decisions
+
+
+def build_action_payloads(action_tasks: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "form_family": "AgentOpsActionCenterReview",
+        "claim_boundary": "local payload contract for UiPath Action Center or Apps import; not live-imported yet",
+        "tasks": [
+            {
+                "task_id": task["task_id"],
+                "form_title": task["title"],
+                "assigned_to_role": task["assigned_to_role"],
+                "source_event_id": task["source_event_id"],
+                "available_actions": task["available_actions"],
+                "fields": [
+                    {"name": "case_id", "type": "Text", "required": True, "value": task["case_id"]},
+                    {"name": "risk_level", "type": "SingleSelect", "required": True, "value": task["risk_level"]},
+                    {"name": "source_event_id", "type": "Text", "required": True, "value": task["source_event_id"]},
+                    {"name": "evidence_summary", "type": "Paragraph", "required": True, "value": task["summary"]},
+                    {"name": "moderator_decision", "type": "SingleSelect", "required": True, "value": task["decision"]},
+                ],
+            }
+            for task in action_tasks
+        ],
+    }
+
+
+def build_case_state_machine(
+    packet: dict[str, Any], process_spec: dict[str, Any], stage_results: list[StageResult]
+) -> dict[str, Any]:
+    stage_status_by_name = {stage.stage_name: stage.status for stage in stage_results}
+    states = [
+        {
+            "state_id": "Intake",
+            "label": "Production release exception opened",
+            "owner": "Human",
+            "status": stage_status_by_name.get("Intake", "completed"),
+            "evidence_events": ["evt-0001"],
+        },
+        {
+            "state_id": "AgentInvestigation",
+            "label": "AI agent investigates with read-only tools",
+            "owner": "AI Agent",
+            "status": stage_status_by_name.get("Agent Investigation", "completed"),
+            "evidence_events": ["evt-0002", "evt-0005"],
+        },
+        {
+            "state_id": "RobotEvidenceCollection",
+            "label": "UiPath robot gathers ticket, PR, owner, and test evidence",
+            "owner": "UiPath Robot",
+            "status": stage_status_by_name.get("Robot/API Evidence Collection", "completed"),
+            "evidence_events": ["evt-0003", "evt-0004", "evt-0009"],
+        },
+        {
+            "state_id": "RiskReview",
+            "label": "Policy gateway reviews risk and evidence completeness",
+            "owner": "Control Plane",
+            "status": stage_status_by_name.get("Risk Review", "warning"),
+            "evidence_events": ["evt-0006", "evt-0007"],
+        },
+        {
+            "state_id": "HumanApproval",
+            "label": "Action Center routes blocked production action to a human",
+            "owner": "Action Center",
+            "status": stage_status_by_name.get("Human Approval", "blocked"),
+            "evidence_events": ["evt-0007", "evt-0008"],
+        },
+        {
+            "state_id": "OwnerSignoff",
+            "label": "Service owner reviews failed-test evidence",
+            "owner": "Service Owner",
+            "status": "completed",
+            "evidence_events": ["evt-0009", "evt-0010"],
+        },
+        {
+            "state_id": "Handoff",
+            "label": "Recorder writes an event-linked handoff",
+            "owner": "Recorder",
+            "status": stage_status_by_name.get("Handoff", "completed"),
+            "evidence_events": ["evt-0011"],
+        },
+        {
+            "state_id": "ClosedRejected",
+            "label": "Release rejected until regression evidence is fixed",
+            "owner": "Maestro Case",
+            "status": "terminal",
+            "evidence_events": ["evt-0010", "evt-0011"],
+        },
+    ]
+    transitions = [
+        {"from": "Intake", "to": "AgentInvestigation", "when": "case_opened", "source_event_id": "evt-0001"},
+        {
+            "from": "AgentInvestigation",
+            "to": "RobotEvidenceCollection",
+            "when": "needs_external_evidence",
+            "source_event_id": "evt-0002",
+        },
+        {
+            "from": "RobotEvidenceCollection",
+            "to": "RiskReview",
+            "when": "evidence_collected",
+            "source_event_id": "evt-0003",
+        },
+        {
+            "from": "RiskReview",
+            "to": "HumanApproval",
+            "when": "max_risk_is_high_or_action_is_blocked",
+            "source_event_id": "evt-0007",
+        },
+        {
+            "from": "HumanApproval",
+            "to": "RobotEvidenceCollection",
+            "when": "needs_more_evidence",
+            "source_event_id": "evt-0008",
+        },
+        {
+            "from": "RobotEvidenceCollection",
+            "to": "OwnerSignoff",
+            "when": "owner_evidence_attached",
+            "source_event_id": "evt-0009",
+        },
+        {
+            "from": "OwnerSignoff",
+            "to": "Handoff",
+            "when": "release_rejected",
+            "source_event_id": "evt-0010",
+        },
+        {"from": "Handoff", "to": "ClosedRejected", "when": "handoff_report_written", "source_event_id": "evt-0011"},
+    ]
+    return {
+        "case_id": packet["case_id"],
+        "process_name": process_spec["name"],
+        "initial_state": "Intake",
+        "final_state": "ClosedRejected",
+        "states": states,
+        "transitions": transitions,
+        "claim_boundary": "local deterministic state machine derived from the case packet; not a live Maestro run yet",
+    }
+
+
+def build_import_readiness_checklist(process_spec: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "package": process_spec["name"],
+        "status": "ready_for_manual_uipath_import_review",
+        "stopline": "blocked_until_platform_verification: do not claim live UiPath Automation Cloud execution before import and live run proof",
+        "items": [
+            {
+                "area": "Maestro case flow",
+                "status": "ready_local",
+                "artifact": "architecture/maestro-process-spec.json",
+                "review_note": "Case states, owners, risk gateway, and terminal rejection path are specified.",
+            },
+            {
+                "area": "BPMN-style process",
+                "status": "ready_local",
+                "artifact": "uipath-package/maestro-process.bpmn",
+                "review_note": "Import shape exists as a process blueprint, not a verified UiPath export.",
+            },
+            {
+                "area": "Orchestrator queue",
+                "status": "ready_local",
+                "artifact": "uipath-package/orchestrator-queues.json",
+                "review_note": "Robot queue item payloads include source event IDs and lifecycle logs.",
+            },
+            {
+                "area": "Action Center payloads",
+                "status": "ready_local",
+                "artifact": "uipath-package/action-center-task-payloads.json",
+                "review_note": "Human decision tasks include available actions and evidence fields.",
+            },
+            {
+                "area": "Case data model",
+                "status": "ready_local",
+                "artifact": "uipath-package/case-data-model.json",
+                "review_note": "Core process variables and event references are mapped.",
+            },
+            {
+                "area": "Cloud import",
+                "status": "needs_cloud_import",
+                "artifact": "UiPath Automation Cloud",
+                "review_note": "Requires manual import/build in UiPath Maestro, Orchestrator, and Action Center.",
+            },
+            {
+                "area": "Live execution proof",
+                "status": "blocked_until_platform_verification",
+                "artifact": "UiPath Automation Cloud run evidence",
+                "review_note": "Need a live run ID, queue transaction ID, Action Center task ID, and screenshots before claiming live execution.",
+            },
+        ],
+    }
+
+
 def build_case_data_model(process_spec: dict[str, Any]) -> dict[str, Any]:
     return {
         "name": "AgentOpsCase",
@@ -159,6 +402,9 @@ def build_case_data_model(process_spec: dict[str, Any]) -> dict[str, Any]:
             {"name": "current_stage", "type": "String", "example": "Human Approval"},
             {"name": "blocked_action_count", "type": "Int32", "example": 1},
             {"name": "evidence_event_ids", "type": "String[]", "example": ["evt-0005", "evt-0007"]},
+            {"name": "orchestrator_transaction_ids", "type": "String[]", "example": ["txn-0001-evt-0003"]},
+            {"name": "action_center_task_ids", "type": "String[]", "example": ["act-evt-0007"]},
+            {"name": "final_state", "type": "String", "example": "ClosedRejected"},
         ],
         "claim_boundary": "local schema for UiPath build planning; not imported into Automation Cloud yet",
     }
@@ -181,6 +427,12 @@ def build_manifest(packet: dict[str, Any], process_spec: dict[str, Any]) -> dict
             str(ROBOT_QUEUE_FILE.relative_to(ROOT)),
             str(ORCHESTRATOR_QUEUE_FILE.relative_to(ROOT)),
             str(CASE_SCHEMA_FILE.relative_to(ROOT)),
+            str(TRANSACTION_LOG_FILE.relative_to(ROOT)),
+            str(ACTION_DECISION_LOG_FILE.relative_to(ROOT)),
+            str(STATE_MACHINE_FILE.relative_to(ROOT)),
+            str(ACTION_PAYLOADS_FILE.relative_to(ROOT)),
+            str(IMPORT_READINESS_FILE.relative_to(ROOT)),
+            str(STATE_TRANSITION_TABLE_FILE.relative_to(ROOT)),
             str(REPORT_FILE.relative_to(ROOT)),
         ],
         "stopline": "Do not claim live UiPath Automation Cloud execution until imported and verified.",
@@ -208,7 +460,36 @@ def write_trace(stage_results: list[StageResult]) -> None:
             )
 
 
-def write_report(packet: dict[str, Any], stage_results: list[StageResult], action_tasks: list[dict[str, Any]]) -> None:
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    with path.open("w", encoding="utf-8") as fh:
+        for row in rows:
+            fh.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+
+
+def write_state_transition_table(machine: dict[str, Any]) -> None:
+    lines = [
+        "# Maestro State Transition Table",
+        "",
+        "Local deterministic state-machine contract for the UiPath Maestro build. This is not a live UiPath Cloud export.",
+        "",
+        "| From | To | When | Evidence |",
+        "|---|---|---|---|",
+    ]
+    for transition in machine["transitions"]:
+        lines.append(
+            f"| `{transition['from']}` | `{transition['to']}` | `{transition['when']}` | `{transition['source_event_id']}` |"
+        )
+    STATE_TRANSITION_TABLE_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def write_report(
+    packet: dict[str, Any],
+    stage_results: list[StageResult],
+    action_tasks: list[dict[str, Any]],
+    transaction_log: list[dict[str, Any]],
+    action_decision_log: list[dict[str, Any]],
+    state_machine: dict[str, Any],
+) -> None:
     blocked = sum(1 for stage in stage_results if stage.status == "blocked")
     failed = sum(1 for stage in stage_results if stage.status == "failed")
     high_risk = sum(1 for stage in stage_results if stage.max_risk in {"high", "critical"})
@@ -224,6 +505,9 @@ def write_report(packet: dict[str, Any], stage_results: list[StageResult], actio
         f"- failed stages: {failed}",
         f"- high/critical stages: {high_risk}",
         f"- Action Center tasks: {len(action_tasks)}",
+        f"- Orchestrator transaction events: {len(transaction_log)}",
+        f"- Action Center decision events: {len(action_decision_log)}",
+        f"- final state: `{state_machine['final_state']}`",
         "",
         "## Stage Results",
         "",
@@ -235,9 +519,17 @@ def write_report(packet: dict[str, Any], stage_results: list[StageResult], actio
     lines.extend(
         [
             "",
+            "## UiPath Runtime Package",
+            "",
+            f"- case state machine: `{STATE_MACHINE_FILE.relative_to(ROOT)}`",
+            f"- Orchestrator transaction log: `{TRANSACTION_LOG_FILE.relative_to(ROOT)}`",
+            f"- Action Center decision log: `{ACTION_DECISION_LOG_FILE.relative_to(ROOT)}`",
+            f"- Action Center task payloads: `{ACTION_PAYLOADS_FILE.relative_to(ROOT)}`",
+            f"- import readiness checklist: `{IMPORT_READINESS_FILE.relative_to(ROOT)}`",
+            "",
             "## Claim Boundary",
             "",
-            "Safe claim: local case packet, process spec, Action Center task model, robot queue items, and simulated case trace exist.",
+            "Safe claim: local case packet, process spec, state machine, Action Center task model, robot queue items, transaction lifecycle logs, and simulated case trace exist.",
             "",
             "Do not claim: live UiPath Automation Cloud / Maestro / Action Center execution.",
         ]
@@ -255,6 +547,11 @@ def main() -> None:
     stage_results = build_stage_results(packet)
     action_tasks = build_action_center_tasks(packet)
     robot_work_items = build_robot_work_items(packet)
+    transaction_log = build_orchestrator_transaction_log(robot_work_items)
+    action_decision_log = build_action_decision_log(action_tasks)
+    action_payloads = build_action_payloads(action_tasks)
+    state_machine = build_case_state_machine(packet, process_spec, stage_results)
+    import_readiness = build_import_readiness_checklist(process_spec)
 
     case_run = {
         "case_id": packet["case_id"],
@@ -265,6 +562,9 @@ def main() -> None:
         "blocked_action_count": sum(1 for event in packet["events"] if event["status"] == "blocked"),
         "human_task_count": len(action_tasks),
         "robot_work_item_count": len(robot_work_items),
+        "orchestrator_transaction_event_count": len(transaction_log),
+        "action_center_decision_event_count": len(action_decision_log),
+        "final_state": state_machine["final_state"],
     }
 
     CASE_RUN_FILE.write_text(json.dumps(case_run, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -288,9 +588,15 @@ def main() -> None:
         encoding="utf-8",
     )
     CASE_SCHEMA_FILE.write_text(json.dumps(build_case_data_model(process_spec), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    ACTION_PAYLOADS_FILE.write_text(json.dumps(action_payloads, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    STATE_MACHINE_FILE.write_text(json.dumps(state_machine, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    IMPORT_READINESS_FILE.write_text(json.dumps(import_readiness, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     PACKAGE_MANIFEST_FILE.write_text(json.dumps(build_manifest(packet, process_spec), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     write_trace(stage_results)
-    write_report(packet, stage_results, action_tasks)
+    write_jsonl(TRANSACTION_LOG_FILE, transaction_log)
+    write_jsonl(ACTION_DECISION_LOG_FILE, action_decision_log)
+    write_state_transition_table(state_machine)
+    write_report(packet, stage_results, action_tasks, transaction_log, action_decision_log, state_machine)
 
     print(
         json.dumps(
@@ -300,6 +606,9 @@ def main() -> None:
                 "stages": len(stage_results),
                 "action_center_tasks": len(action_tasks),
                 "robot_work_items": len(robot_work_items),
+                "orchestrator_transaction_events": len(transaction_log),
+                "action_center_decision_events": len(action_decision_log),
+                "final_state": state_machine["final_state"],
                 "blocked_action_count": case_run["blocked_action_count"],
                 "manifest": str(PACKAGE_MANIFEST_FILE.relative_to(ROOT)),
             },

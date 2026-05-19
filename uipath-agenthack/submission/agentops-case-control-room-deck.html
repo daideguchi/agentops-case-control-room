@@ -80,12 +80,12 @@
     </div>
     <div class="grid">
       <div>
-        <p>Implementation artifacts include a BPMN-style process blueprint, case data model, Action Center form schema, robot queue model, and simulated case run.</p>
+        <p>Implementation artifacts include a BPMN-style process blueprint, case data model, Action Center form schema, robot queue model, state machine, transaction logs, and simulated case run.</p>
       </div>
       <div class="card">
         <p><code>uipath-package/maestro-process.bpmn</code></p>
-        <p><code>runtime/robot-work-items.json</code></p>
-        <p><code>action-center/action-center-tasks.json</code></p>
+        <p><code>runtime/case-state-machine.json</code></p>
+        <p><code>runtime/orchestrator-transaction-log.jsonl</code></p>
       </div>
     </div>
     <div class="footer">Claim boundary: verified local prototype and UiPath-ready implementation package.</div>
@@ -103,6 +103,9 @@
           <li>1 blocked production action</li>
           <li>2 robot work items</li>
           <li>3 Action Center tasks</li>
+          <li>6 Orchestrator transaction events</li>
+          <li>9 Action Center decision events</li>
+          <li>Final state: ClosedRejected</li>
         </ul>
       </div>
       <div class="card">

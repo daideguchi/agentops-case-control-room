@@ -14,6 +14,12 @@
     "runtime/robot-work-items.json",
     "uipath-package/orchestrator-queues.json",
     "uipath-package/case-data-model.json",
+    "runtime/orchestrator-transaction-log.jsonl",
+    "runtime/action-center-decision-log.jsonl",
+    "runtime/case-state-machine.json",
+    "uipath-package/action-center-task-payloads.json",
+    "uipath-package/import-readiness-checklist.json",
+    "uipath-package/maestro-state-transition-table.md",
     "runtime/maestro-simulated-run-report.md"
   ],
   "stopline": "Do not claim live UiPath Automation Cloud execution until imported and verified."

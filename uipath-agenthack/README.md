@@ -15,6 +15,10 @@ Current local proof:
 - Rebuild script: `scripts/build_case_room.py`
 - Runtime simulator: `scripts/simulate_maestro_case.py`
 - UiPath blueprint exporter: `scripts/export_uipath_blueprint.py`
+- State machine: `runtime/case-state-machine.json`
+- Orchestrator transaction log: `runtime/orchestrator-transaction-log.jsonl`
+- Action Center decision log: `runtime/action-center-decision-log.jsonl`
+- Import-readiness checklist: `uipath-package/import-readiness-checklist.json`
 
 ![UiPath case room](media/uipath-case-room-full.png)
 
@@ -97,6 +101,7 @@ Expected proof:
 - UiPath case room generator returns `status: ok`
 - UiPath simulator returns `status: ok`
 - UiPath package verifier returns `uipath_verify_ok`
+- verifier reports `json=11`, `jsonl=3`, `state_machine=ClosedRejected`
 - case room HTML exists at `prototype/maestro-case-room.html`
 - Action Center demo exists at `action-center/action-center-demo.html`
 - screenshot exists at `media/uipath-case-room-full.png`
@@ -112,6 +117,9 @@ Expected proof:
 - Maestro process spec: `architecture/maestro-process-spec.json`
 - Maestro implementation plan: `architecture/maestro-implementation-plan.md`
 - Simulated case run: `runtime/maestro-simulated-case-run.json`
+- Case state machine: `runtime/case-state-machine.json`
+- Orchestrator transaction log: `runtime/orchestrator-transaction-log.jsonl`
+- Action Center decision log: `runtime/action-center-decision-log.jsonl`
 - Action Center task model: `action-center/action-center-tasks.json`
 - Robot work items: `runtime/robot-work-items.json`
 - UiPath implementation package: `uipath-package/`

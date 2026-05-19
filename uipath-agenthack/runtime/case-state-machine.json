@@ -1,0 +1,138 @@
+{
+  "case_id": "CASE-AI-OPS-001",
+  "process_name": "AgentOps Case Control Room",
+  "initial_state": "Intake",
+  "final_state": "ClosedRejected",
+  "states": [
+    {
+      "state_id": "Intake",
+      "label": "Production release exception opened",
+      "owner": "Human",
+      "status": "completed",
+      "evidence_events": [
+        "evt-0001"
+      ]
+    },
+    {
+      "state_id": "AgentInvestigation",
+      "label": "AI agent investigates with read-only tools",
+      "owner": "AI Agent",
+      "status": "failed",
+      "evidence_events": [
+        "evt-0002",
+        "evt-0005"
+      ]
+    },
+    {
+      "state_id": "RobotEvidenceCollection",
+      "label": "UiPath robot gathers ticket, PR, owner, and test evidence",
+      "owner": "UiPath Robot",
+      "status": "completed",
+      "evidence_events": [
+        "evt-0003",
+        "evt-0004",
+        "evt-0009"
+      ]
+    },
+    {
+      "state_id": "RiskReview",
+      "label": "Policy gateway reviews risk and evidence completeness",
+      "owner": "Control Plane",
+      "status": "blocked",
+      "evidence_events": [
+        "evt-0006",
+        "evt-0007"
+      ]
+    },
+    {
+      "state_id": "HumanApproval",
+      "label": "Action Center routes blocked production action to a human",
+      "owner": "Action Center",
+      "status": "blocked",
+      "evidence_events": [
+        "evt-0007",
+        "evt-0008"
+      ]
+    },
+    {
+      "state_id": "OwnerSignoff",
+      "label": "Service owner reviews failed-test evidence",
+      "owner": "Service Owner",
+      "status": "completed",
+      "evidence_events": [
+        "evt-0009",
+        "evt-0010"
+      ]
+    },
+    {
+      "state_id": "Handoff",
+      "label": "Recorder writes an event-linked handoff",
+      "owner": "Recorder",
+      "status": "completed",
+      "evidence_events": [
+        "evt-0011"
+      ]
+    },
+    {
+      "state_id": "ClosedRejected",
+      "label": "Release rejected until regression evidence is fixed",
+      "owner": "Maestro Case",
+      "status": "terminal",
+      "evidence_events": [
+        "evt-0010",
+        "evt-0011"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "from": "Intake",
+      "to": "AgentInvestigation",
+      "when": "case_opened",
+      "source_event_id": "evt-0001"
+    },
+    {
+      "from": "AgentInvestigation",
+      "to": "RobotEvidenceCollection",
+      "when": "needs_external_evidence",
+      "source_event_id": "evt-0002"
+    },
+    {
+      "from": "RobotEvidenceCollection",
+      "to": "RiskReview",
+      "when": "evidence_collected",
+      "source_event_id": "evt-0003"
+    },
+    {
+      "from": "RiskReview",
+      "to": "HumanApproval",
+      "when": "max_risk_is_high_or_action_is_blocked",
+      "source_event_id": "evt-0007"
+    },
+    {
+      "from": "HumanApproval",
+      "to": "RobotEvidenceCollection",
+      "when": "needs_more_evidence",
+      "source_event_id": "evt-0008"
+    },
+    {
+      "from": "RobotEvidenceCollection",
+      "to": "OwnerSignoff",
+      "when": "owner_evidence_attached",
+      "source_event_id": "evt-0009"
+    },
+    {
+      "from": "OwnerSignoff",
+      "to": "Handoff",
+      "when": "release_rejected",
+      "source_event_id": "evt-0010"
+    },
+    {
+      "from": "Handoff",
+      "to": "ClosedRejected",
+      "when": "handoff_report_written",
+      "source_event_id": "evt-0011"
+    }
+  ],
+  "claim_boundary": "local deterministic state machine derived from the case packet; not a live Maestro run yet"
+}

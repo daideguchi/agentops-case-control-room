@@ -83,9 +83,13 @@ It includes:
 - a Maestro-style case room
 - an Action Center-style approval task model
 - robot evidence work items
+- Orchestrator transaction lifecycle logs
+- Action Center decision lifecycle logs
+- a deterministic case state machine
 - a BPMN-style process blueprint
 - a case data model
 - an approval form schema
+- a UiPath import-readiness checklist with an explicit live-platform stopline
 - a local runtime simulator
 - a draft demo video
 - a presentation deck
@@ -103,10 +107,15 @@ Observed output:
 ```text
 verify_ok
 uipath_verify_ok
-json=8
+json=11
+jsonl=3
 html=2
+markdown=2
 xml=1
 screenshots=2
+state_machine=ClosedRejected
+transaction_events=6
+action_decision_events=9
 ```
 
 ## Built With
@@ -126,6 +135,7 @@ Codex contributed to:
 - building the Maestro-style case room
 - building the Action Center-style approval demo
 - exporting robot work items and a BPMN-style process blueprint
+- generating case state, Orchestrator transaction, and Action Center decision logs
 - creating local verification scripts
 - creating the public GitHub Pages demo entry
 - creating submission-package documents and draft demo videos
@@ -151,6 +161,9 @@ That is why the repository includes a clear claim boundary, implementation packa
 - Generated a UiPath-oriented case packet
 - Created Action Center-style approval tasks
 - Created robot evidence work items
+- Added Orchestrator transaction lifecycle logs
+- Added Action Center decision lifecycle logs
+- Added a deterministic state machine with blocked, more-evidence, owner-signoff, and rejected paths
 - Exported a BPMN-style process blueprint
 - Added a case data model and approval form schema
 - Added local verification scripts

@@ -85,8 +85,12 @@ uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4
 - Maestro-style case room
 - Action Center-style approval task model
 - Robot work-item model
+- Orchestrator transaction lifecycle log
+- Action Center decision lifecycle log
+- Case state machine with blocked, more-evidence, owner-signoff, and rejected paths
 - BPMN-style Maestro process blueprint
 - Action Center form schema
+- UiPath import-readiness checklist with explicit cloud-verification stopline
 - Simulated case runtime
 - Evidence-linked handoff report
 - Local verification scripts
@@ -96,10 +100,15 @@ Current verified local results:
 ```text
 verify_ok
 uipath_verify_ok
-json=8
+json=11
+jsonl=3
 html=2
+markdown=2
 xml=1
 screenshots=2
+state_machine=ClosedRejected
+transaction_events=6
+action_decision_events=9
 ```
 
 ## Run The Demo Locally
@@ -136,6 +145,10 @@ shared-agentops-engine/web/index.html
 | Action Center task | `uipath-agenthack/action-center/action-center-tasks.json` |
 | Approval form | `uipath-agenthack/uipath-package/action-center-form-schema.json` |
 | Robot evidence queue | `uipath-agenthack/runtime/robot-work-items.json` |
+| Orchestrator transaction log | `uipath-agenthack/runtime/orchestrator-transaction-log.jsonl` |
+| Action Center decision log | `uipath-agenthack/runtime/action-center-decision-log.jsonl` |
+| Maestro state machine | `uipath-agenthack/runtime/case-state-machine.json` |
+| Import readiness checklist | `uipath-agenthack/uipath-package/import-readiness-checklist.json` |
 | Handoff report | `shared-agentops-engine/reports/handoff_report.md` |
 
 ## Coding Agent Usage
