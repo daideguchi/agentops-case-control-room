@@ -9,7 +9,7 @@ Status: submitted on Devpost after DD final authorization. Public proof and vide
 - Devpost: `https://devpost.com/software/agentops-case-control-room`
 - GitHub: `https://github.com/daideguchi/agentops-case-control-room`
 - Live demo: `https://daideguchi.github.io/agentops-case-control-room/`
-- YouTube demo: `https://www.youtube.com/watch?v=-xbPUI7u0Gw`
+- YouTube demo: `https://www.youtube.com/watch?v=UIofHgD2blw`
 
 ## Current Proof Assets
 

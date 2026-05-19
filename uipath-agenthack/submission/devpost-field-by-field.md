@@ -37,7 +37,7 @@ https://github.com/daideguchi/agentops-case-control-room
 Demo video:
 
 ```text
-https://www.youtube.com/watch?v=-xbPUI7u0Gw
+https://www.youtube.com/watch?v=UIofHgD2blw
 ```
 
 Direct media fallback:
@@ -222,4 +222,4 @@ Use these assets in the media section if the form allows them:
 
 ## Final Submit Stopline
 
-DD approved final submission. Devpost now shows the project submitted to UiPath AgentHack, and the public page embeds the YouTube demo video.
+DD approved final submission. Devpost now shows the project submitted to UiPath AgentHack, and the public page embeds the clear-audio YouTube demo video.

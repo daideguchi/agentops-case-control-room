@@ -10,7 +10,7 @@ Submission package: [SUBMISSION_PACKAGE.md](SUBMISSION_PACKAGE.md)
 
 Live demo: https://daideguchi.github.io/agentops-case-control-room/
 
-YouTube demo: https://www.youtube.com/watch?v=-xbPUI7u0Gw
+YouTube demo: https://www.youtube.com/watch?v=UIofHgD2blw
 
 Coding agent evidence: [CODING_AGENT_EVIDENCE.md](CODING_AGENT_EVIDENCE.md)
 
@@ -81,7 +81,7 @@ The story comes from a real human-AI working rhythm: AI agents can move quickly,
 Captioned narrated demo video for Devpost media:
 
 ```text
-https://www.youtube.com/watch?v=-xbPUI7u0Gw
+https://www.youtube.com/watch?v=UIofHgD2blw
 uipath-agenthack/media/agentops-case-control-room-demo.mp4
 ```
 
