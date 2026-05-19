@@ -4,6 +4,8 @@ Turn AI-agent work into a UiPath-governed case with evidence, risk, human approv
 
 Target hackathon: [UiPath AgentHack](https://uipath-agenthack.devpost.com/)
 
+Submission package: [SUBMISSION_PACKAGE.md](SUBMISSION_PACKAGE.md)
+
 ## What This Is
 
 AI agents can now investigate issues, run tools, call APIs, and suggest actions. That is useful, but real business work is not just a chat transcript.
