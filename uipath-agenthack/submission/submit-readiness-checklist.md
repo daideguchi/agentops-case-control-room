@@ -1,8 +1,8 @@
 # UiPath AgentHack Submit Readiness Checklist
 
-Updated: 2026-05-19 21:40 JST
+Updated: 2026-05-20 JST
 
-Status: preparing, not finally submitted.
+Status: final submit authorized by DD; Devpost saved/submitted proof still must be recorded after the form is completed.
 
 ## Current Proof Assets
 
@@ -10,6 +10,7 @@ Status: preparing, not finally submitted.
 - Case room screenshot: `media/uipath-case-room-full.png`
 - Action Center approval demo: `action-center/action-center-demo.html`
 - Action Center screenshot: `media/action-center-demo-full.png`
+- Demo video: `media/agentops-case-control-room-demo.mp4`
 - Shared dashboard: `../shared-agentops-engine/web/index.html`
 - Shared dashboard screenshot: `../shared-agentops-engine/media/shared-dashboard-full.png`
 - UiPath case packet: `../shared-agentops-engine/adapters/uipath/case_packet.json`
@@ -29,7 +30,7 @@ python3 scripts/verify_artifacts.py
 ```
 
 ```bash
-cd /Users/dd/000_AI組織/__hackason/uipath-agenthack
+cd /Users/dd/000_AI組織/__hackason/agentops-case-control-room-public/uipath-agenthack
 bash scripts/run_uipath_local_checks.sh
 ```
 
@@ -44,6 +45,7 @@ bash scripts/run_uipath_local_checks.sh
 - UiPath package verifier returns `uipath_verify_ok`
 - UiPath case room screenshot captured at `media/uipath-case-room-full.png`
 - Action Center screenshot captured at `media/action-center-demo-full.png`
+- Demo video verified as H.264/AAC at `media/agentops-case-control-room-demo.mp4`
 - HTML smoke check passed for `Maestro Case Flow`, `Human Approval Queue`, and `Evidence Timeline`
 
 ## Submit Package Drafts
@@ -61,7 +63,7 @@ bash scripts/run_uipath_local_checks.sh
 ## Not Yet Claimed
 
 - Do not claim real UiPath Automation Cloud integration until it is actually built and verified.
-- Do not claim a final Devpost submission until DD explicitly approves and the submission page is saved.
+- Do not claim a final Devpost submission until the submission page is saved/submitted and the public proof URL is recorded.
 - Do not accept additional platform terms, submit personal forms, or enter billing details without DD approval.
 
 ## Next Best Step

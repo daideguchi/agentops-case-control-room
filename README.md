@@ -70,12 +70,12 @@ The demo scenario is a production release exception for a payment service.
 
 ![Shared AgentOps dashboard](shared-agentops-engine/media/shared-dashboard-full.png)
 
-### Draft Demo Video
+### Demo Video
 
-Silent draft video for Devpost media preparation:
+Captioned narrated demo video for Devpost media:
 
 ```text
-uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4
+uipath-agenthack/media/agentops-case-control-room-demo.mp4
 ```
 
 ## What Is Working Locally

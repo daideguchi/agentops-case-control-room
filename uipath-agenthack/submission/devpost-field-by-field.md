@@ -30,10 +30,10 @@ GitHub repository:
 https://github.com/daideguchi/agentops-case-control-room
 ```
 
-Draft demo video:
+Demo video:
 
 ```text
-https://raw.githubusercontent.com/daideguchi/agentops-case-control-room/main/uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4
+https://raw.githubusercontent.com/daideguchi/agentops-case-control-room/main/uipath-agenthack/media/agentops-case-control-room-demo.mp4
 ```
 
 Presentation deck:
@@ -50,9 +50,11 @@ https://daideguchi.github.io/agentops-case-control-room/CODING_AGENT_EVIDENCE.md
 
 ## Inspiration
 
-AI agents are starting to do real operational work. They investigate issues, call tools, run scripts, and suggest production actions.
+I built this from inside a real human-AI working rhythm. While building with AI coding agents, the surprising part was not that agents could move quickly. The harder part was knowing what they did, what evidence they used, what was still risky, when a human should stop the work, and how another person or another AI could safely continue later.
 
-That can save time, but it also creates a governance problem: real business work cannot be just a chat transcript.
+That is the world AgentOps Case Control Room is designed for.
+
+AI agents are starting to do real operational work. They investigate issues, call tools, run scripts, and suggest production actions. That can save time, but real businesses cannot run on chat transcripts and trust-me summaries.
 
 AgentOps Case Control Room was built around a simple idea: when AI helps with operational work, the work should become a governed case with evidence, approval gates, robot work items, and a handoff trail.
 
@@ -71,6 +73,8 @@ The flagship demo is a production release exception:
 - the final handoff preserves event IDs, evidence, risk, and decisions
 
 The result is a case room where a human can understand what the agent did, what evidence was collected, what risk was found, what was blocked, and how the work can be resumed later.
+
+The product is not trying to make agents invisible. It makes their work visible enough that humans can trust, challenge, stop, resume, and eventually delegate more safely.
 
 ## How We Built It
 
@@ -91,7 +95,7 @@ It includes:
 - an approval form schema
 - a UiPath import-readiness checklist with an explicit live-platform stopline
 - a local runtime simulator
-- a draft demo video
+- a captioned narrated demo video
 - a presentation deck
 - repeatable verification scripts
 
@@ -138,7 +142,7 @@ Codex contributed to:
 - generating case state, Orchestrator transaction, and Action Center decision logs
 - creating local verification scripts
 - creating the public GitHub Pages demo entry
-- creating submission-package documents and draft demo videos
+- creating submission-package documents and demo videos
 - running repeatable verification commands before public push
 
 Verifiable evidence is included here:
@@ -180,6 +184,8 @@ They need case structure, approval boundaries, evidence, and resumable handoff.
 
 The strongest role for a platform like UiPath is not just running automation faster. It is making automation and AI-agent work governable.
 
+The future is not just humans using AI tools. It is humans and AI agents sharing work. For that to be useful instead of chaotic, the work needs an operating layer that both humans and future agents can understand.
+
 ## What's Next
 
 The next step is to import the generated process, queue, and approval models into UiPath Automation Cloud / Maestro and verify a live case run.
@@ -200,7 +206,7 @@ Use these assets in the media section if the form allows them:
 - `uipath-agenthack/media/uipath-case-room-full.png`
 - `uipath-agenthack/media/action-center-demo-full.png`
 - `shared-agentops-engine/media/shared-dashboard-full.png`
-- `uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4`
+- `uipath-agenthack/media/agentops-case-control-room-demo.mp4`
 - `uipath-agenthack/submission/agentops-case-control-room-deck.pdf`
 
 ## Final Submit Stopline

@@ -48,9 +48,9 @@ Open the live demo or these local demo files after cloning the repository:
 
 ## Demo Video
 
-Draft silent video:
+Captioned narrated video:
 
-- `uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4`
+- `uipath-agenthack/media/agentops-case-control-room-demo.mp4`
 
 Regenerate:
 
@@ -61,9 +61,9 @@ bash scripts/build_demo_video.sh
 
 ## Inspiration
 
-AI agents are starting to do real operational work. They investigate issues, call tools, run scripts, and suggest production actions. That can save time, but it also creates a governance problem: real business work cannot be just a chat transcript.
+I built this from inside a real human-AI working rhythm. While building with AI coding agents, the surprising part was not that agents could move quickly. The harder part was knowing what they did, what evidence they used, what was still risky, when a human should stop the work, and how another person or another AI could safely continue later.
 
-AgentOps Case Control Room was built around a simple idea: when AI helps with operational work, the work should become a governed case with evidence, approval gates, robot work items, and a handoff trail.
+That is the world AgentOps Case Control Room is designed for. AI agents will help with real operational work, but real businesses cannot run on chat transcripts and trust-me summaries. They need cases, evidence, approval gates, robot work items, and handoffs.
 
 ## What It Does
 
@@ -78,6 +78,8 @@ The flagship demo is a production release exception:
 - a risky production deployment is blocked
 - Action Center-style tasks route the decision to humans
 - the final handoff preserves event IDs, evidence, risk, and decisions
+
+The product is not trying to make agents invisible. It makes their work visible enough that humans can trust, challenge, stop, resume, and eventually delegate more safely.
 
 ## How We Built It
 
@@ -163,6 +165,8 @@ The main challenge was turning a broad human-AI operations story into a concrete
 ## What We Learned
 
 AI operations need more than autonomy. They need case structure, approval boundaries, evidence, and resumable handoff.
+
+The future is not just humans using AI tools. It is humans and AI agents sharing work. For that to be useful instead of chaotic, the work needs an operating layer that both humans and future agents can understand.
 
 ## What's Next
 

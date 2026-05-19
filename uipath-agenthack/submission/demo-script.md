@@ -4,9 +4,9 @@ Target length: under 5 minutes.
 
 ## 0:00 - 0:25 Opening
 
-Enterprise AI work is becoming a case, not a chat.
+AI agents are becoming operational workers. The problem is no longer only speed. The problem is governance.
 
-This demo shows how UiPath can govern work that moves between a human, an AI coding agent, a robot, APIs, and approval gates.
+This demo shows how UiPath can govern work that moves between a human, an AI coding agent, a robot, APIs, and approval gates. The goal is not to hide the agent. The goal is to make the agent's work visible, reviewable, and safe to resume.
 
 ## 0:25 - 1:10 Case Intake
 
