@@ -26,6 +26,19 @@ Open these local demo files after cloning the repository:
 - `uipath-agenthack/media/action-center-demo-full.png`
 - `shared-agentops-engine/media/shared-dashboard-full.png`
 
+## Demo Video
+
+Draft silent video:
+
+- `uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4`
+
+Regenerate:
+
+```bash
+cd uipath-agenthack
+bash scripts/build_demo_video.sh
+```
+
 ## Inspiration
 
 AI agents are starting to do real operational work. They investigate issues, call tools, run scripts, and suggest production actions. That can save time, but it also creates a governance problem: real business work cannot be just a chat transcript.
@@ -84,6 +97,7 @@ screenshots=2
 ```bash
 cd uipath-agenthack
 bash scripts/run_uipath_local_checks.sh
+bash scripts/build_demo_video.sh
 ```
 
 ## Demo Script Summary

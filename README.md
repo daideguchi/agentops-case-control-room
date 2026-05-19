@@ -59,6 +59,14 @@ The demo scenario is a production release exception for a payment service.
 
 ![Shared AgentOps dashboard](shared-agentops-engine/media/shared-dashboard-full.png)
 
+### Draft Demo Video
+
+Silent draft video for Devpost media preparation:
+
+```text
+uipath-agenthack/media/agentops-case-control-room-demo-draft.mp4
+```
+
 ## What Is Working Locally
 
 - Shared AgentOps event stream with 26 events
@@ -95,6 +103,7 @@ Run:
 ```bash
 cd uipath-agenthack
 bash scripts/run_uipath_local_checks.sh
+bash scripts/build_demo_video.sh
 ```
 
 Open:
