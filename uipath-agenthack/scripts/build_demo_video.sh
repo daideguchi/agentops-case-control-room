@@ -7,8 +7,9 @@ FONT="/System/Library/Fonts/Supplemental/Arial.ttf"
 OUT="$ROOT/media/agentops-case-control-room-demo.mp4"
 LEGACY_OUT="$ROOT/media/agentops-case-control-room-demo-draft.mp4"
 TMP_DIR="$ROOT/media/.demo_video_tmp"
-VOICE="${DEMO_VOICE:-Samantha}"
-RATE="${DEMO_RATE:-135}"
+EDGE_TTS_PYTHON="${EDGE_TTS_PYTHON:-python3.11}"
+EDGE_TTS_VOICE="${EDGE_TTS_VOICE:-en-US-AvaNeural}"
+EDGE_TTS_RATE="${EDGE_TTS_RATE:--8%}"
 
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
@@ -96,7 +97,11 @@ The service owner rejects the release until the regression is fixed. The handoff
 This is the product idea. AI-agent work should become a governed case that humans and future AI agents can safely resume.
 TEXT
 
-say -v "$VOICE" -r "$RATE" -o "$TMP_DIR/narration.aiff" -f "$TMP_DIR/narration.txt"
+"$EDGE_TTS_PYTHON" -m edge_tts \
+  --voice "$EDGE_TTS_VOICE" \
+  --rate="$EDGE_TTS_RATE" \
+  --file "$TMP_DIR/narration.txt" \
+  --write-media "$TMP_DIR/narration.mp3"
 
 ffmpeg -y \
   -loop 1 -t 12 -i "$TMP_DIR/slide-0.png" \
@@ -106,7 +111,7 @@ ffmpeg -y \
   -loop 1 -t 12 -i "$TMP_DIR/slide-4.png" \
   -loop 1 -t 12 -i "$TMP_DIR/slide-5.png" \
   -loop 1 -t 12 -i "$TMP_DIR/slide-6.png" \
-  -i "$TMP_DIR/narration.aiff" \
+  -i "$TMP_DIR/narration.mp3" \
   -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v]concat=n=7:v=1:a=0,format=yuv420p[v];[7:a]loudnorm=I=-16:TP=-1.5:LRA=11[a]" \
   -map "[v]" -map "[a]" -r 30 -c:a aac -b:a 192k -shortest -movflags +faststart "$OUT"
 
