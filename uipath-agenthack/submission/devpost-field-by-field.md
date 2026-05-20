@@ -37,7 +37,7 @@ https://github.com/daideguchi/agentops-case-control-room
 Demo video:
 
 ```text
-https://www.youtube.com/watch?v=UIofHgD2blw
+https://www.youtube.com/watch?v=BxALGpCLZd4
 ```
 
 Direct media fallback:

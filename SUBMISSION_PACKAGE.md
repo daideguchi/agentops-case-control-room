@@ -22,7 +22,7 @@ https://daideguchi.github.io/agentops-case-control-room/
 
 ## YouTube Demo
 
-https://www.youtube.com/watch?v=UIofHgD2blw
+https://www.youtube.com/watch?v=BxALGpCLZd4
 
 ## Presentation Deck
 
@@ -59,7 +59,7 @@ Open the live demo or these local demo files after cloning the repository:
 
 Captioned narrated video:
 
-- YouTube: `https://www.youtube.com/watch?v=UIofHgD2blw`
+- YouTube: `https://www.youtube.com/watch?v=BxALGpCLZd4`
 - Local file: `uipath-agenthack/media/agentops-case-control-room-demo.mp4`
 
 Regenerate:
