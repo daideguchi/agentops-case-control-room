@@ -60,11 +60,13 @@ https://daideguchi.github.io/agentops-case-control-room/CODING_AGENT_EVIDENCE.md
 
 ## Inspiration
 
+AI agents are starting to feel like coworkers. They can investigate issues, call tools, run scripts, and suggest production actions. That can save time, but a business cannot approve real work from a chat transcript. It needs a case: evidence, risk, approval gates, robot work items, and a clean handoff.
+
 I built this from inside a real human-AI working rhythm. While building with AI coding agents, the surprising part was not that agents could move quickly. The harder part was knowing what they did, what evidence they used, what was still risky, when a human should stop the work, and how another person or another AI could safely continue later.
 
 That is the world AgentOps Case Control Room is designed for.
 
-AI agents are starting to do real operational work. They investigate issues, call tools, run scripts, and suggest production actions. That can save time, but real businesses cannot run on chat transcripts and trust-me summaries.
+AI agents are starting to do real operational work. Real businesses cannot run on trust-me summaries.
 
 AgentOps Case Control Room was built around a simple idea: when AI helps with operational work, the work should become a governed case with evidence, approval gates, robot work items, and a handoff trail.
 

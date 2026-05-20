@@ -21,6 +21,14 @@ Presentation deck:
 
 Devpost field draft: [uipath-agenthack/submission/devpost-field-by-field.md](uipath-agenthack/submission/devpost-field-by-field.md)
 
+## Judge Quick Read
+
+- Problem: AI agents can investigate, call tools, and suggest production actions, but companies cannot govern real work from a chat transcript.
+- Solution: AgentOps Case Control Room turns human, AI agent, robot, API, and system activity into one UiPath-style governed case.
+- Demo: a payment-service release exception is investigated, enriched by robot evidence, blocked by policy, routed to human approval, and rejected until a regression is fixed.
+- Proof: the repo includes 26 structured events, a UiPath case packet, Maestro-style case room, Action Center tasks, robot work items, Orchestrator transaction logs, Action Center decision logs, a deterministic case state machine, and repeatable verification scripts.
+- Boundary: this submission claims a verified local prototype and UiPath-ready implementation package. It does not claim live UiPath Automation Cloud execution yet.
+
 ## What This Is
 
 AI agents can now investigate issues, run tools, call APIs, and suggest actions. That is useful, but real business work is not just a chat transcript.
