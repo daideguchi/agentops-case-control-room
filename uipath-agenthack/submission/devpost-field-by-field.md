@@ -222,4 +222,4 @@ Use these assets in the media section if the form allows them:
 
 ## Final Submit Stopline
 
-DD approved final submission. Devpost now shows the project submitted to UiPath AgentHack, and the public page embeds the clear-audio YouTube demo video.
+DD approved final submission. Devpost now shows the project submitted to UiPath AgentHack, and the public page embeds the Natural English YouTube demo video.
